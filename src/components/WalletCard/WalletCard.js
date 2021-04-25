@@ -12,7 +12,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SimpleCard(props) {
+export default function WalletCard(props) {
   const classes = useStyles();
 
   return (
@@ -22,7 +22,7 @@ export default function SimpleCard(props) {
           {props.walletName}
         </Typography>
         <Typography variant="body2" component="p">
-          Description of my wallet
+          {props.description}
         </Typography>
       </CardContent>
       <CardActions>

@@ -1,10 +1,23 @@
-import SimpleCard from '../../components/WalletCard/WalletCard'
+import {useEffect, useState} from 'react'
+import { Link, useParams } from 'react-router-dom'
+import {getWalletsByUsername} from '../../services/walletService'
+import WalletList from '../../components/WalletList/WalletList'
 import Container from '@material-ui/core/Container';
 
-export default function HomePage() {
+export const HomePage = () => {
+
+    const [wallets, setWallets] = useState([])
+    const { username } = useParams()
+    
+    useEffect(() => {
+        (async () => {
+            setWallets(await getWalletsByUsername('danydany'))
+        })()
+    }, [])
+
     return (
-            <Container maxWidth="sm">
-                <SimpleCard walletName="danymike's wallet" userId="6083b4f81017160506d6025d"/>
+            <Container>
+                <WalletList wallets={wallets}/>
             </Container>
     )
 }

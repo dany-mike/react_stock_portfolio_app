@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import {getWalletsByUsername} from '../../services/walletService'
 import WalletList from '../../components/WalletList/WalletList'
 import Container from '@material-ui/core/Container';
@@ -11,9 +11,9 @@ export const HomePage = () => {
     
     useEffect(() => {
         (async () => {
-            setWallets(await getWalletsByUsername('danydany'))
+            setWallets(await getWalletsByUsername(username))
         })()
-    }, [])
+    }, [username])
 
     return (
             <Container>

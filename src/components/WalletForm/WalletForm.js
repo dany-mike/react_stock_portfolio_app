@@ -13,6 +13,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import { getWalletById } from '../../services/walletService'
 import axios from 'axios'
 import {walletByUsernameRequest} from '../../services/walletService'
+import Typography from '@material-ui/core/Typography';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,12 +35,11 @@ export default function WalletForm(props) {
     })
 
     useEffect(() => {
-        (async () => {
-            if(props.url === "http://localhost:3000/wallet/edit-wallet") {
-            setWalletForm(await getWalletById(username, walletId))
-
-            }
-        })()
+            (async () => {
+                if(props.url === "http://localhost:3000/wallet/edit-wallet") {
+                setWalletForm(await getWalletById(username, walletId))
+                }
+            })()
     }, [username, walletId, props.url])
 
     const handleChange = (e) => {
@@ -53,7 +53,6 @@ export default function WalletForm(props) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         if(props.url === "http://localhost:3000/wallet/edit-wallet") {
-            console.log("in the edit req")
             await walletByUsernameRequest(username, walletForm, props.url, axios.patch, walletId)
             history.push(`/wallets/${username}`)
         } else {
@@ -65,13 +64,25 @@ export default function WalletForm(props) {
     let button
 
     if(props.url === "http://localhost:3000/wallet/edit-wallet") {
-        button = <Button type="submit" >Edit wallet</Button>
+        button = <Button variant="outlined" color="primary" type="submit" >Edit wallet</Button>
     } else {
-        button = <Button type="submit" >Add new wallet</Button>
+        button = <Button variant="outlined" color="primary" type="submit" >Add new wallet</Button>
     }
+
+    let title 
+
+    if(props.url === "http://localhost:3000/wallet/edit-wallet") {
+        title = <Typography variant="h4" component="h2" className={styles.paddingOne}>Edit Wallet</Typography>
+    } else {
+        title = <Typography variant="h4" component="h2" className={styles.paddingOne}>Add Wallet</Typography>
+    }
+
+
 
     return (
         <Card className={styles.margin}>
+
+            {title}
             <form onSubmit={handleSubmit} className={clsx(styles.marginOne, classes.margin)}>
                 <CardContent>
                     <FormControl fullWidth >

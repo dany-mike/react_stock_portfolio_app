@@ -10,7 +10,7 @@ function App() {
     <Router>
       <Header/>
       <Route exact path="/">
-        <Redirect to="/wallets/danydany" />
+        <Redirect to="/wallets/danymike" />
       </Route>
       <Route path='/wallets/:username' exact component={HomePage}/>
       <Route path='/add-wallet/:username' exact component={AddWalletPage}/>

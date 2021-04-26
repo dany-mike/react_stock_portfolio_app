@@ -1,4 +1,5 @@
 import { makeStyles} from '@material-ui/core/styles';
+import {useHistory, useParams} from "react-router-dom";
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -12,8 +13,17 @@ const useStyles = makeStyles({
   },
 });
 
+
 export default function WalletCard(props) {
   const classes = useStyles();
+
+  const { username } = useParams()
+  const history = useHistory()
+
+  const handleClickEdit = (e) => {
+    e.preventDefault();
+    history.push(`/edit-wallet/${username}/${props._id}`)
+}
 
   return (
     <Card className={styles.margin}>
@@ -21,12 +31,14 @@ export default function WalletCard(props) {
         <Typography className={classes.title} color="textSecondary" gutterBottom>
           {props.walletName}
         </Typography>
-        <Typography variant="body2" component="p">
+        <Typography variant="body2" component="p" value="test">
           {props.description}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Go to this wallet</Button>
+        <Button variant="outlined">Go to this wallet</Button>
+        <Button variant="outlined" color='primary' onClick={handleClickEdit}>Edit wallet</Button>
+        <Button variant="outlined" color='secondary'>Delete Wallet</Button>
       </CardActions>
     </Card>
   );

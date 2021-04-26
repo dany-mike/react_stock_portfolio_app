@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {useHistory, useParams} from "react-router-dom";
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -10,7 +10,8 @@ import styles from "./WalletForm.module.css"
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-
+import { getWalletById } from '../../services/walletService'
+import axios from 'axios'
 import {walletByUsernameRequest} from '../../services/walletService'
 
 
@@ -20,8 +21,10 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export default function WalletForm({url}) {
+export default function WalletForm(props) {
+
     const { username } = useParams()
+    const { walletId } = useParams()
 
     const classes = useStyles();
 
@@ -29,6 +32,15 @@ export default function WalletForm({url}) {
         walletName: '',
         description: ''
     })
+
+    useEffect(() => {
+        (async () => {
+            if(props.url === "http://localhost:3000/wallet/edit-wallet") {
+            setWalletForm(await getWalletById(username, walletId))
+
+            }
+        })()
+    }, [username, walletId, props.url])
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -40,8 +52,22 @@ export default function WalletForm({url}) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await walletByUsernameRequest(username, walletForm, url)
-        history.push(`/wallets/${username}`)
+        if(props.url === "http://localhost:3000/wallet/edit-wallet") {
+            console.log("in the edit req")
+            await walletByUsernameRequest(username, walletForm, props.url, axios.patch, walletId)
+            history.push(`/wallets/${username}`)
+        } else {
+            await walletByUsernameRequest(username, walletForm, props.url, axios.post, "")
+            history.push(`/wallets/${username}`)
+        }
+    }
+
+    let button
+
+    if(props.url === "http://localhost:3000/wallet/edit-wallet") {
+        button = <Button type="submit" >Edit wallet</Button>
+    } else {
+        button = <Button type="submit" >Add new wallet</Button>
     }
 
     return (
@@ -53,7 +79,7 @@ export default function WalletForm({url}) {
                         <Input
                             id="walletName"
                             onChange={handleChange}
-                            value={walletForm.walletName || ''}
+                            value={walletForm.walletName}
                             name="walletName"
                         />
                     </FormControl>
@@ -62,13 +88,13 @@ export default function WalletForm({url}) {
                         <Input
                             id="description"
                             onChange={handleChange}
-                            value={walletForm.description || ''}
+                            value={walletForm.description}
                             name="description"
                         />
                     </FormControl>
                 </CardContent>
                 <CardActions>
-                <Button type="submit" >Add new wallet</Button>
+                    {button}
                 </CardActions>
             </form>
         </Card>

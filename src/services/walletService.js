@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 export const getWalletsByUsername = async (username) => {
     let wallets = []
     const response = await fetch(`http://localhost:3000/wallet/${username}`)
@@ -7,6 +5,13 @@ export const getWalletsByUsername = async (username) => {
     return wallets
 }
 
-export const walletByUsernameRequest = async (username, data, url) => {
-    await axios.post(`${url}/${username}`, data)
+export const walletByUsernameRequest = async (username, data, url, method, walletId) => {
+    await method(`${url}/${username}/${walletId}`, data)
+}
+
+export const getWalletById = async (username, walletId) => {
+    let walletObj = []
+    const response = await fetch(`http://localhost:3000/wallet/get-wallet/${username}/${walletId}`)
+    walletObj = await response.json()
+    return walletObj
 }

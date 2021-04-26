@@ -9,14 +9,19 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Alert from '@material-ui/lab/Alert';
+import {useState} from 'react'
+import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
+import {signin, signup} from '../../services/authenticationService'
+import styles from './Auth.module.css'
 
 function Copyright() {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
-        <Link color="inherit" href="https://github.com/dany-mike/stock_portfolio_app_reactjs">
+        <a color="inherit" href='https://github.com/dany-mike/stock_portfolio_app_reactjs'>
           Wallet App
-        </Link>{' '}
+        </a>{' '}
         {new Date().getFullYear()}
         {'.'}
       </Typography>
@@ -46,13 +51,44 @@ const useStyles = makeStyles((theme) => ({
 export default function Auth({authType}) {
     const classes = useStyles();
 
+    const [auth, setAuth] = useState({
+        username: '',
+        email: '',
+        password: ''
+    })
+
+    const [error, setError] = useState('')
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        // ... keep the values in the form object
+        setAuth({...auth, [name]: value })
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        if(authType === "signin") {
+            setError(await signin(auth))
+        }
+        
+        if (authType === "signup") {
+            setError(await signup(auth))
+        }
+    }
+
+    // Rendering
     let title;
     let isUsername
     let link
+    let icon
+    let text
+    let alertError
 
     if(authType === "signup") {
+        text = "Sign Up"
         title = <Typography component="h1" variant="h5">Sign up</Typography>
         isUsername = <TextField
+        onChange={handleChange}
         variant="outlined"
         margin="normal"
         required
@@ -64,24 +100,34 @@ export default function Auth({authType}) {
         autoFocus
         />
         link = <Link variant="body2" to='/signin'>{"Already have an account? Sign In"}</Link>
+        icon = <VerifiedUserIcon />
     }
 
     if(authType === "signin") {
+        text = "Sign In"
         title = <Typography component="h1" variant="h5">Sign in</Typography>
         link = <Link variant="body2" to='/signup'>{"Don't have an account? Sign Up"}</Link>
+        icon = <LockOutlinedIcon />
     }
+
+    if(error !== "") {
+        alertError = <Alert severity="error" className={styles.marginTopOne}>{error.data}</Alert>
+    }
+
 
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
             <Avatar className={classes.avatar}>
-                <LockOutlinedIcon />
+                {icon}
             </Avatar>
             {title}
-            <form className={classes.form} noValidate>
+            {alertError}
+            <form onSubmit={handleSubmit} className={classes.form} noValidate>
                 {isUsername}
                 <TextField
+                onChange={handleChange}
                 variant="outlined"
                 margin="normal"
                 required
@@ -93,6 +139,7 @@ export default function Auth({authType}) {
                 autoFocus
                 />
                 <TextField
+                onChange={handleChange}
                 variant="outlined"
                 margin="normal"
                 required
@@ -110,7 +157,7 @@ export default function Auth({authType}) {
                 color="primary"
                 className={classes.submit}
                 >
-                Sign In
+                {text}
                 </Button>
                 <Grid item>
                     {link}

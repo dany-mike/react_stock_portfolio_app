@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import styles from './Header.module.css'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,8 +28,8 @@ export default function Header() {
           <Typography variant="h6" className={classes.title}>
             Wallet App
           </Typography>
-          <Link variant="body2" to='/signin' style={{ textDecoration: 'none' , color: 'white' }}><Button color="inherit">Sign In</Button></Link>
-          <Link variant="body2" to='/signup' style={{ textDecoration: 'none' , color: 'white' }}><Button color="inherit">Sign Up</Button></Link>
+          <Link variant="body2" to='/signin' className={styles.menu}><Button color="inherit">Sign In</Button></Link>
+          <Link variant="body2" to='/signup' className={styles.menu}><Button color="inherit">Sign Up</Button></Link>
         </Toolbar>
       </AppBar>
     </div>

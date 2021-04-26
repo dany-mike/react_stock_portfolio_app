@@ -77,8 +77,6 @@ export default function WalletForm(props) {
         title = <Typography variant="h4" component="h2" className={styles.paddingOne}>Add Wallet</Typography>
     }
 
-
-
     return (
         <Card className={styles.margin}>
 

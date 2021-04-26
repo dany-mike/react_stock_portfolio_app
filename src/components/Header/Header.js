@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import {Link} from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -26,8 +27,8 @@ export default function Header() {
           <Typography variant="h6" className={classes.title}>
             Wallet App
           </Typography>
-          <Button color="inherit">Sign In</Button>
-          <Button color="inherit">Sign Up</Button>
+          <Link variant="body2" to='/signin' style={{ textDecoration: 'none' , color: 'white' }}><Button color="inherit">Sign In</Button></Link>
+          <Link variant="body2" to='/signup' style={{ textDecoration: 'none' , color: 'white' }}><Button color="inherit">Sign Up</Button></Link>
         </Toolbar>
       </AppBar>
     </div>

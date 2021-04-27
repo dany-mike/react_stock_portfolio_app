@@ -1,6 +1,7 @@
 import axios from 'axios';
+axios.defaults.withCredentials = true
 
-export const signin = async (body, token) => {
+export const signin = async (body) => {
 
     try {
         return await axios.post(`http://localhost:3000/user/login`, body)

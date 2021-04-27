@@ -1,4 +1,6 @@
 import axios from 'axios'
+axios.defaults.withCredentials = true
+
 
 export const getWalletsByUsername = async (username) => {
     let wallets = []

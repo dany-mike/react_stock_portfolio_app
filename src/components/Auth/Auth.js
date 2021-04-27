@@ -60,8 +60,6 @@ export default function Auth({authType}) {
 
     const [res, setRes] = useState(false)
     const [resObject, setResObject] = useState({})
-    // const [token, setToken] = useState('')
-
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -72,7 +70,7 @@ export default function Auth({authType}) {
     useEffect(() => {
         if(res) {
             (async () => {
-                setResObject(await signin(auth))
+                await setResObject(await signin(auth))
 
                 if(resObject.status === 200) {
                     localStorage.setItem('jwtToken', resObject.data.token)

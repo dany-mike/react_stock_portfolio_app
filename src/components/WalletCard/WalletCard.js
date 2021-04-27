@@ -31,7 +31,7 @@ export default function WalletCard(props) {
         let isConfirm = window.confirm('Are you sure to delete this wallet?')
         if(isConfirm) {
           await deleteWalletByWalletId(username, props._id)
-          history.push(`/`)
+          history.push(`/wallets`)
         }
       })()
     }

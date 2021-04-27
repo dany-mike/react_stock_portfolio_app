@@ -1,8 +1,15 @@
 import axios from 'axios';
 
-export const signin = async (body) => {
+export const signin = async (body, token) => {
+
+    // let config = {
+    //     headers: {
+    //         'auth-token': token
+    //       }
+    // }
+
     try {
-        await axios.post(`http://localhost:3000/user/login`, body)
+        return await axios.post(`http://localhost:3000/user/login`, body)
     } catch(err) {
         return err.response
     }

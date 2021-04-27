@@ -2,7 +2,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Alert from '@material-ui/lab/Alert';
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import {signin, signup} from '../../services/authenticationService'
 import styles from './Auth.module.css'
@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Auth({authType}) {
     const classes = useStyles();
+    const history = useHistory()
 
     const [auth, setAuth] = useState({
         username: '',
@@ -64,6 +65,16 @@ export default function Auth({authType}) {
         // ... keep the values in the form object
         setAuth({...auth, [name]: value })
     };
+
+    useEffect(() => {
+
+        // !Error
+        if(error.status === 200) {
+            console.log(error.data)
+            setError('');
+        }
+
+    }, [error])
 
     const handleSubmit = async (e) => {
         e.preventDefault()

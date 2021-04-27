@@ -58,7 +58,10 @@ export default function Auth({authType}) {
         password: ''
     })
 
-    const [error, setError] = useState('')
+    const [res, setRes] = useState(false)
+    const [resObject, setResObject] = useState({})
+    // const [token, setToken] = useState('')
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -67,28 +70,31 @@ export default function Auth({authType}) {
     };
 
     useEffect(() => {
+        if(res) {
+            (async () => {
+                setResObject(await signin(auth))
 
-        // !Error
-        if(error.status === 200) {
-            console.log(error.data)
-            setError('');
+                if(resObject.status === 200) {
+                    localStorage.setItem('jwtToken', resObject.data.token)
+                }
+                setRes(false)
+            })()
         }
-
-    }, [error])
+    }, [res, auth, resObject])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         if(authType === "signin") {
-            setError(await signin(auth))
+            setRes(true)
         }
         
         if (authType === "signup") {
-            setError(await signup(auth))
+            setRes(await signup(auth))
         }
     }
 
     // Rendering
-    let title;
+    let title
     let isUsername
     let link
     let icon
@@ -121,8 +127,8 @@ export default function Auth({authType}) {
         icon = <LockOutlinedIcon />
     }
 
-    if(error !== "") {
-        alertError = <Alert severity="error" className={styles.marginTopOne}>{error.data}</Alert>
+    if(resObject.status === 400) {
+        alertError = <Alert severity="error" className={styles.marginTopOne}>{resObject.data}</Alert>
     }
 
 

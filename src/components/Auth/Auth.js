@@ -70,15 +70,17 @@ export default function Auth({authType}) {
     useEffect(() => {
         if(res) {
             (async () => {
-                await setResObject(await signin(auth))
+                setResObject(await signin(auth))
 
                 if(resObject.status === 200) {
-                    localStorage.setItem('jwtToken', resObject.data.token)
+                    // setUser(await getUser(resObject.data._id))
+                    // console.log(user)
+                    history.push(`/wallets/`)
                 }
                 setRes(false)
             })()
         }
-    }, [res, auth, resObject])
+    }, [res, auth, resObject, history])
 
     const handleSubmit = async (e) => {
         e.preventDefault()

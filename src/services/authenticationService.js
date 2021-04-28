@@ -17,3 +17,11 @@ export const signup = async (body) => {
         return err.response
     }
 }
+
+export const getUser = async (id) => {
+    try {   
+        return await axios.get(`http://localhost:3000/user/get-user/${id}`)
+    } catch(err) {
+        return err.response
+    }
+}

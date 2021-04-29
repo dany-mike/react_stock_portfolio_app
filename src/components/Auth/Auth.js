@@ -73,11 +73,12 @@ export default function Auth({authType}) {
                 setResObject(await signin(auth))
 
                 if(resObject.status === 200) {
-                    // setUser(await getUser(resObject.data._id))
-                    // console.log(user)
-                    history.push(`/wallets/`)
+                    history.push("/wallets/danydany")
                 }
-                setRes(false)
+
+                if(resObject.status !== 200) {
+                    setRes(false)
+                }
             })()
         }
     }, [res, auth, resObject, history])

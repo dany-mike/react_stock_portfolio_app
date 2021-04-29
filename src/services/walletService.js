@@ -1,10 +1,9 @@
 import axios from 'axios'
-axios.defaults.withCredentials = true
-
+// axios.defaults.withCredentials = true
 
 export const getWalletsByUsername = async (username) => {
     let wallets = []
-    const response = await fetch(`http://localhost:3000/wallet/${username}`)
+    const response = await fetch(`http://localhost:3000/wallet/${username}`,{withCredentials: true})
     wallets = await response.json()
     return wallets
 }

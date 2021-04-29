@@ -5,6 +5,7 @@ import EditWalletPage from './pages/EditWallet/EditWalletPage';
 import SignInPage from './pages/SignIn/SignInPage'
 import SignUpPage from './pages/SignUp/SignUpPage'
 import {HomePage} from './pages/Home/HomePage'
+import TestComponent from './components/Test/TestComponent';
 
 
 function App() {
@@ -14,9 +15,9 @@ function App() {
       <Route exact path="/">
         <Redirect to="/signin"/>
       </Route>
-      {/* <Route exact path="/wallets">
+      <Route exact path="/wallets" component={TestComponent}>
         <Redirect to="/signin"/>
-      </Route> */}
+      </Route>
       <Route path='/signin' exact component={SignInPage}/>
       <Route path='/signup' exact component={SignUpPage}/>
       <Route path='/wallets/:username' exact component={HomePage}/>

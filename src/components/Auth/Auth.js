@@ -73,7 +73,7 @@ export default function Auth({authType}) {
                 setResObject(await signin(auth))
 
                 if(resObject.status === 200) {
-                    history.push("/wallets/danydany")
+                    history.push(`/wallets/${auth.username}`)
                 }
 
                 if(resObject.status !== 200) {
@@ -96,7 +96,6 @@ export default function Auth({authType}) {
 
     // Rendering
     let title
-    let isUsername
     let link
     let icon
     let text
@@ -105,18 +104,6 @@ export default function Auth({authType}) {
     if(authType === "signup") {
         text = "Sign Up"
         title = <Typography component="h1" variant="h5">Sign up</Typography>
-        isUsername = <TextField
-        onChange={handleChange}
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        id="username"
-        label="Choose a username"
-        name="username"
-        autoComplete="username"
-        autoFocus
-        />
         link = <Link variant="body2" to='/signin'>{"Already have an account? Sign In"}</Link>
         icon = <VerifiedUserIcon />
     }
@@ -143,7 +130,18 @@ export default function Auth({authType}) {
             {title}
             {alertError}
             <form onSubmit={handleSubmit} className={classes.form} noValidate>
-                {isUsername}
+                <TextField
+                onChange={handleChange}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
+                autoFocus
+                />                
                 <TextField
                 onChange={handleChange}
                 variant="outlined"

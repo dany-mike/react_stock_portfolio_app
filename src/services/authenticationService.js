@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 export const signin = async (body) => {
-
     try {
         return await axios.post(`http://localhost:3000/user/login`, body,  {
+            withCredentials: true
         })
     } catch(err) {
         return err.response

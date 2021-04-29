@@ -70,6 +70,7 @@ export default function Auth({authType}) {
     useEffect(() => {
         if(res) {
             (async () => {
+                
                 setResObject(await signin(auth))
 
                 if(resObject.status === 200) {

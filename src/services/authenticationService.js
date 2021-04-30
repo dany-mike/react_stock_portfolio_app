@@ -31,3 +31,15 @@ export const getUser = async (id) => {
         return err.response
     }
 }
+
+export const isUser = async () => {
+
+    let check = false
+
+    const response = await axios.get('http://localhost:3000/user/check', {
+    })
+
+    check = response
+
+    return check
+}

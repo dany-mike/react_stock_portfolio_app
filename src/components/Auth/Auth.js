@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Alert from '@material-ui/lab/Alert';
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import {getUser, signin, signup} from '../../services/authenticationService'
 import styles from './Auth.module.css'
@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Auth({authType}) {
+
     const classes = useStyles();
     const history = useHistory()
 
@@ -68,6 +69,7 @@ export default function Auth({authType}) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
         if(authType === "signin") {
             const resSign = await signin(auth)
 
@@ -84,13 +86,7 @@ export default function Auth({authType}) {
         if (authType === "signup") {
             const resRegister = await signup(auth)
 
-            console.log(resRegister)
-
-            if(resRegister.status == 200) {
-                // await setTimeout(() => {
-                //     console.log("test")
-                // })
-
+            if(resRegister.status === 200) {
                 history.push('/signin')
             }
 

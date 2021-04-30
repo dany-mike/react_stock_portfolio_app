@@ -12,7 +12,7 @@ import Container from '@material-ui/core/Container';
 import Alert from '@material-ui/lab/Alert';
 import {useState, useEffect} from 'react'
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
-import {signin, signup} from '../../services/authenticationService'
+import {getUser, signin, signup} from '../../services/authenticationService'
 import styles from './Auth.module.css'
 
 function Copyright() {
@@ -58,7 +58,6 @@ export default function Auth({authType}) {
         password: ''
     })
 
-    const [res, setRes] = useState(false)
     const [resObject, setResObject] = useState({})
 
     const handleChange = (e) => {
@@ -67,31 +66,23 @@ export default function Auth({authType}) {
         setAuth({...auth, [name]: value })
     };
 
-    useEffect(() => {
-        if(res) {
-            (async () => {
-                
-                setResObject(await signin(auth))
-
-                if(resObject.status === 200) {
-                    history.push(`/wallets/${auth.username}`)
-                }
-
-                if(resObject.status !== 200) {
-                    setRes(false)
-                }
-            })()
-        }
-    }, [res, auth, resObject, history])
-
     const handleSubmit = async (e) => {
         e.preventDefault()
         if(authType === "signin") {
-            setRes(true)
+            const resSign = await signin(auth)
+
+            if(resSign.status === 200) {
+                const resUser = await getUser(resSign.data._id)
+                history.push(`/wallets/${resUser.username}`)
+            }
+
+            if(resSign.status !== 200) {
+                setResObject(resSign)
+            }
         }
-        
+
         if (authType === "signup") {
-            setRes(await signup(auth))
+            await signup(auth)
         }
     }
 

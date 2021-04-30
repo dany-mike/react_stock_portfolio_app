@@ -21,9 +21,12 @@ export const signup = async (body) => {
 
 export const getUser = async (id) => {
     try {   
-        return await axios.get(`http://localhost:3000/user/get-user/${id}`, {
-            withCredentials: true
+        let user = []
+        const response = await fetch(`http://localhost:3000/user/get-user/${id}`, {
+            credentials: 'include'
         })
+        user = await response.json()
+        return user
     } catch(err) {
         return err.response
     }

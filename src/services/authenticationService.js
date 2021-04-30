@@ -12,7 +12,7 @@ export const signin = async (body) => {
 
 export const signup = async (body) => {
     try {   
-        await axios.post(`http://localhost:3000/user/register`, body, {
+        return await axios.post(`http://localhost:3000/user/register`, body, {
         })
     } catch(err) {
         return err.response

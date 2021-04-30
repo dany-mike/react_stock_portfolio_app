@@ -82,7 +82,21 @@ export default function Auth({authType}) {
         }
 
         if (authType === "signup") {
-            await signup(auth)
+            const resRegister = await signup(auth)
+
+            console.log(resRegister)
+
+            if(resRegister.status == 200) {
+                // await setTimeout(() => {
+                //     console.log("test")
+                // })
+
+                history.push('/signin')
+            }
+
+            if(resRegister.status !== 200) {
+                setResObject(resRegister)
+            }
         }
     }
 

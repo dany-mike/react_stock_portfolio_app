@@ -101,8 +101,23 @@ export default function Auth({authType}) {
     let icon
     let text
     let alertError
+    let isUsername
 
     if(authType === "signup") {
+        isUsername = 
+        <TextField
+        onChange={handleChange}
+        variant="outlined"
+        margin="normal"
+        required
+        fullWidth
+        id="username"
+        label="Username"
+        name="username"
+        autoComplete="username"
+        autoFocus
+        />
+
         text = "Sign Up"
         title = <Typography component="h1" variant="h5">Sign up</Typography>
         link = <Link variant="body2" to='/signin'>{"Already have an account? Sign In"}</Link>
@@ -131,18 +146,7 @@ export default function Auth({authType}) {
             {title}
             {alertError}
             <form onSubmit={handleSubmit} className={classes.form} noValidate>
-                <TextField
-                onChange={handleChange}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="username"
-                label="Username"
-                name="username"
-                autoComplete="username"
-                autoFocus
-                />                
+                {isUsername}
                 <TextField
                 onChange={handleChange}
                 variant="outlined"

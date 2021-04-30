@@ -22,7 +22,7 @@ export const signup = async (body) => {
 export const getUser = async (id) => {
     try {   
         return await axios.get(`http://localhost:3000/user/get-user/${id}`, {
-            credentials: 'include'
+            withCredentials: true
         })
     } catch(err) {
         return err.response

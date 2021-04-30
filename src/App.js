@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Redirect, PrivateRoute} from 'react-router-dom'
 import Header from './components/Header/Header'
 import AddWalletPage from './pages/AddWallet/AddWalletPage';
 import EditWalletPage from './pages/EditWallet/EditWalletPage';
@@ -6,6 +6,10 @@ import SignInPage from './pages/SignIn/SignInPage'
 import SignUpPage from './pages/SignUp/SignUpPage'
 import {HomePage} from './pages/Home/HomePage'
 
+
+// const PrivateRoute = ({component: HomePage}) => (
+  
+// )
 
 function App() {
   return (

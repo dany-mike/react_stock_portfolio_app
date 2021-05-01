@@ -11,6 +11,7 @@ import styles from './WalletPage.module.css'
 import { WalletContentByWalletId } from '../../services/walletService'
 import {useEffect, useState} from 'react'
 import { useParams, useHistory } from 'react-router-dom'
+import CompanyList from '../../components/CompanyList/CompanyList'
 
 
 const useStyles = makeStyles({
@@ -38,7 +39,7 @@ export default function WalletPage() {
     }, [username, walletId, history])
 
     const classes = useStyles();
-    console.log(walletContent)
+
     return (
         <Container className={styles.marginTop}>
             <TableContainer component={Paper}>
@@ -48,24 +49,14 @@ export default function WalletPage() {
                     <TableCell>Company</TableCell>
                     <TableCell>Symbol</TableCell>
                     <TableCell>Stock Price(now)</TableCell>
-                    <TableCell>Stock Price(forecast)</TableCell>
+                    <TableCell>Stock Price(forecast 1y)</TableCell>
                     <TableCell>Shares Number</TableCell>
                     <TableCell>Activity Area</TableCell>
                     <TableCell>About</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {/* {rows.map((row) => (
-                    <TableRow key={row.name}>
-                        <TableCell component="th" scope="row">
-                        {row.name}
-                        </TableCell>
-                        <TableCell align="right">{row.calories}</TableCell>
-                        <TableCell align="right">{row.fat}</TableCell>
-                        <TableCell align="right">{row.carbs}</TableCell>
-                        <TableCell align="right">{row.protein}</TableCell>
-                    </TableRow>
-                    ))} */}
+                    <CompanyList datas={walletContent}/>
                 </TableBody>
                 </Table>
             </TableContainer>

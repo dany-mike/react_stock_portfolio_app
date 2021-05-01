@@ -14,6 +14,7 @@ import { getWalletById } from '../../services/walletService'
 import axios from 'axios'
 import {walletByUsernameRequest} from '../../services/walletService'
 import Typography from '@material-ui/core/Typography';
+import { Link } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -77,8 +78,6 @@ export default function WalletForm(props) {
         title = <Typography variant="h4" component="h2" className={styles.paddingOne}>Add Wallet</Typography>
     }
 
-
-
     return (
         <Card className={styles.margin}>
 
@@ -106,6 +105,7 @@ export default function WalletForm(props) {
                 </CardContent>
                 <CardActions>
                     {button}
+                   <Link variant="body2" to={`/wallets/${username}`}><Button variant="outlined" color="secondary" type="submit" >Back</Button></Link> 
                 </CardActions>
             </form>
         </Card>

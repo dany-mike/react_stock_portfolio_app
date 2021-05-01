@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import styles from './Header.module.css'
+import {logout} from '../../services/authenticationService'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,8 +19,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header() {
+const logoutFunc = async () => {
+    await logout()
+    document.location.reload();
+}
+
+export default function Header({isLoggedIn}) {
   const classes = useStyles();
+
+  let signsButtons
+  let logout
+
+  if(!isLoggedIn) {
+    signsButtons = <><Link variant="body2" to='/signin' className={styles.menu}><Button color="inherit">Sign In</Button></Link>
+    <Link variant="body2" to='/signup' className={styles.menu}><Button color="inherit">Sign Up</Button></Link></>
+  } else {
+    logout = <Link variant="body2" to='/signin' className={styles.menu} onClick={logoutFunc}><Button color="inherit">Logout</Button></Link>
+  }
 
   return (
     <div className={classes.root}>
@@ -28,8 +44,8 @@ export default function Header() {
           <Typography variant="h6" className={classes.title}>
             Wallet App
           </Typography>
-          <Link variant="body2" to='/signin' className={styles.menu}><Button color="inherit">Sign In</Button></Link>
-          <Link variant="body2" to='/signup' className={styles.menu}><Button color="inherit">Sign Up</Button></Link>
+          {signsButtons}
+          {logout}
         </Toolbar>
       </AppBar>
     </div>

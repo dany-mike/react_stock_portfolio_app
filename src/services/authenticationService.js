@@ -37,9 +37,17 @@ export const isUser = async () => {
     let check = false
 
     const response = await axios.get('http://localhost:3000/user/check', {
+        withCredentials: true
     })
 
     check = response
 
     return check
+}
+
+export const logout = async () => {
+        const response = await axios.get('http://localhost:3000/user/logout', {
+            withCredentials: true
+        })
+        return response
 }

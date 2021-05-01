@@ -76,6 +76,7 @@ export default function Auth({authType}) {
             if(resSign.status === 200) {
                 const resUser = await getUser(resSign.data._id)
                 history.push(`/wallets/${resUser.username}`)
+                document.location.reload();
             }
 
             if(resSign.status !== 200) {

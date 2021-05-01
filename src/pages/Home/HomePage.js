@@ -10,14 +10,17 @@ export const HomePage = () => {
 
     const [wallets, setWallets] = useState([])
     const { username } = useParams()
+    const history = useHistory()
     
     useEffect(() => {
         (async () => {
-            setWallets(await getWalletsByUsername(username))
+            try {
+                setWallets(await getWalletsByUsername(username))
+            } catch(err) {
+                history.push('/signin')
+            }
         })()
-    }, [username])
-
-    const history = useHistory()
+    }, [username, history])
 
     const handleClickCreate = (e) => {
         e.preventDefault();

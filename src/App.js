@@ -6,12 +6,24 @@ import SignInPage from './pages/SignIn/SignInPage'
 import SignUpPage from './pages/SignUp/SignUpPage'
 import {HomePage} from './pages/Home/HomePage'
 import NotFound from './components/NotFound/NotFound'
+import {useEffect, useState} from 'react'
+import {isUser} from './services/authenticationService'
 
 export default function App() {
 
+  const [user, setUser] = useState(false) 
+
+  useEffect(() => {
+    (async () => {
+      console.log('test')
+      const data = await isUser()
+      setUser(data.data)
+    })()
+  }, [])
+
   return (
     <Router>
-      <Header/>
+      <Header isLoggedIn={user}/>
       <Switch>
         <Route exact path="/">
           <Redirect to="/signin" />

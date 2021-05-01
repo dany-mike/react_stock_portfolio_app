@@ -1,22 +1,46 @@
-import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 import Header from './components/Header/Header'
 import AddWalletPage from './pages/AddWallet/AddWalletPage';
 import EditWalletPage from './pages/EditWallet/EditWalletPage';
+import SignInPage from './pages/SignIn/SignInPage'
+import SignUpPage from './pages/SignUp/SignUpPage'
 import {HomePage} from './pages/Home/HomePage'
+import NotFound from './components/NotFound/NotFound'
+import {useEffect, useState} from 'react'
+import {isUser} from './services/authenticationService'
 
+export default function App() {
 
-function App() {
+  const [user, setUser] = useState(false) 
+
+  useEffect(() => {
+    (async () => {
+      console.log('test')
+      const data = await isUser()
+      setUser(data.data)
+    })()
+  }, [])
+
   return (
     <Router>
-      <Header/>
-      <Route exact path="/">
-        <Redirect to="/wallets/danymike" />
-      </Route>
-      <Route path='/wallets/:username' exact component={HomePage}/>
-      <Route path='/add-wallet/:username' exact component={AddWalletPage}/>
-      <Route path='/edit-wallet/:username/:walletId' exact component={EditWalletPage}/>
+      <Header isLoggedIn={user}/>
+      <Switch>
+        <Route exact path="/">
+          <Redirect to="/signin" />
+        </Route>
+        <Route path='/wallets/:username' exact component={HomePage}/>
+        <Route exact path='/add-wallet/:username' component={AddWalletPage}/>
+        <Route exact path='/edit-wallet/:username/:walletId' component={EditWalletPage}/>
+        {/* <Route path='/testpage' exact component={IsAuth}/> */}
+        <Route exact path='/wallets/:username' component={HomePage} />
+        <Route path='/signin' component={SignInPage}/>
+        <Route path='/signup' component={SignUpPage}/>
+        <Route>
+          <NotFound/>
+        </Route>
+      </Switch>
     </Router>
-  );
+  )
 }
 
-export default App;
+

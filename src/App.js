@@ -11,6 +11,7 @@ import NotFound from './components/NotFound/NotFound'
 
 import {useEffect, useState} from 'react'
 import {isUser} from './services/authenticationService'
+import AboutCompanyPage from './pages/AboutCompany/AboutCompanyPage';
 
 export default function App() {
 
@@ -32,6 +33,7 @@ export default function App() {
         </Route>
         <Route path='/wallets/:username' exact component={HomePage}/>
         <Route path='/wallet/:username/:walletId' exact component={WalletPage}/>
+        <Route path='/about-company/:username/:walletId/:symbol' exact component={AboutCompanyPage}/>
         <Route exact path='/add-wallet/:username' component={AddWalletPage}/>
         <Route exact path='/edit-wallet/:username/:walletId' component={EditWalletPage}/>
         <Route exact path='/wallets/:username' component={HomePage} />

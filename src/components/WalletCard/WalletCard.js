@@ -37,6 +37,11 @@ export default function WalletCard(props) {
     }
 }, [deleteWallet, props._id, username, history])
 
+  const handleGoWallet = (e) => {
+    e.preventDefault()
+    history.push(`/wallet/${username}/${props._id}`)
+  }
+
   const handleClickEdit = (e) => {
     e.preventDefault();
     history.push(`/edit-wallet/${username}/${props._id}`)
@@ -48,7 +53,7 @@ export default function WalletCard(props) {
   }
 
   return <>
-    <Card className={styles.margin}>
+    <Card className={styles.margin} variant="outlined">
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
           {props.walletName}
@@ -58,7 +63,7 @@ export default function WalletCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button variant="outlined">Go to this wallet</Button>
+        <Button variant="outlined" onClick={handleGoWallet}>Go to this wallet</Button>
         <Button variant="outlined" color='primary' onClick={handleClickEdit}>Edit wallet</Button>
         <Button variant="outlined" color='secondary' onClick={handleClickDelete}>Delete Wallet</Button>
       </CardActions>

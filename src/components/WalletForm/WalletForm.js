@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import {useHistory, useParams} from "react-router-dom";
+import {useHistory, useParams, Link} from "react-router-dom";
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -14,7 +14,6 @@ import { getWalletById } from '../../services/walletService'
 import axios from 'axios'
 import {walletByUsernameRequest} from '../../services/walletService'
 import Typography from '@material-ui/core/Typography';
-import { Link } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -79,7 +78,7 @@ export default function WalletForm(props) {
     }
 
     return (
-        <Card className={styles.margin}>
+        <Card className={styles.margin} variant="outlined">
 
             {title}
             <form onSubmit={handleSubmit} className={clsx(styles.marginOne, classes.margin)}>
@@ -105,7 +104,7 @@ export default function WalletForm(props) {
                 </CardContent>
                 <CardActions>
                     {button}
-                   <Link variant="body2" to={`/wallets/${username}`}><Button variant="outlined" color="secondary" type="submit" >Back</Button></Link> 
+                   <Link variant="body2" to={`/wallets/${username}`} style={{ color: 'inherit', textDecoration: 'inherit'}}><Button variant="outlined" color="secondary">Back</Button></Link> 
                 </CardActions>
             </form>
         </Card>

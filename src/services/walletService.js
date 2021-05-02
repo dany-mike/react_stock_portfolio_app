@@ -30,3 +30,14 @@ export const deleteWalletByWalletId = async(username, walletId) => {
     })
 }
 
+export const WalletContentByWalletId = async(username, walletId) => {
+    let walletContent = []
+
+    const response = await axios.get(`http://localhost:3000/wallet/${username}/${walletId}`, {
+        withCredentials: true
+    })
+
+    walletContent = response.data
+
+    return walletContent
+}

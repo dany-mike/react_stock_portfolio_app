@@ -53,7 +53,7 @@ export default function WalletCard(props) {
   }
 
   return <>
-    <Card className={styles.margin}>
+    <Card className={styles.margin} variant="outlined">
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
           {props.walletName}

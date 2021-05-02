@@ -15,8 +15,8 @@ export default function CompanyList({datas}) {
         <TableRow key={data._id}>
             <TableCell>{data.companyName}</TableCell>
             <TableCell>{data.symbol}</TableCell>
-            <TableCell>{data.stockPrice}$</TableCell>
-            <TableCell>{data.forecastPrice}$</TableCell>
+            <TableCell>${data.stockPrice}</TableCell>
+            <TableCell>${data.forecastPrice}</TableCell>
             <TableCell>{data.sharesNumber}</TableCell>
             <TableCell>{data.activityArea}</TableCell>
             <TableCell><Link to={`/about-company/${username}/${walletId}/${data.symbol}`} style={{ color: 'inherit', textDecoration: 'inherit'}}><Button variant="outlined">About {data.symbol}</Button></Link></TableCell>

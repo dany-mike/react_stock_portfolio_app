@@ -42,7 +42,7 @@ export default function WalletPage() {
 
     return (
         <Container className={styles.marginTop}>
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} variant="outlined">
                 <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                     <TableRow>

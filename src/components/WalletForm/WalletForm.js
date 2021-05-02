@@ -78,7 +78,7 @@ export default function WalletForm(props) {
     }
 
     return (
-        <Card className={styles.margin}>
+        <Card className={styles.margin} variant="outlined">
 
             {title}
             <form onSubmit={handleSubmit} className={clsx(styles.marginOne, classes.margin)}>

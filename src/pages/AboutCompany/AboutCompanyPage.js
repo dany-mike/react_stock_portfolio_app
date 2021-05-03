@@ -42,12 +42,10 @@ export default function AboutCompanyPage() {
       try {
         setCompany(await getCompanyBySymbol(username, walletId, symbol));
       } catch (err) {
-        // history.push('/signin')
+        history.push('/signin')
       }
     })();
-  }, [username, walletId, history]);
-
-  console.log(company);
+  }, [username, walletId, history, symbol]);
 
   return (
     <Container className={styles.marginTop}>

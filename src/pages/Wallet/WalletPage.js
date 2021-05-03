@@ -1,4 +1,3 @@
-import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -15,12 +14,6 @@ import CompanyList from '../../components/CompanyList/CompanyList'
 import Circular from '../../components/Circular/Circular'
 
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
-
 export default function WalletPage() {
 
     const [walletContent, setWalletContent] = useState([])
@@ -29,8 +22,6 @@ export default function WalletPage() {
     const history = useHistory()
     const { username } = useParams()
     const { walletId } = useParams()
-    const classes = useStyles();
-
 
     useEffect(() => {
         (async () => {
@@ -68,13 +59,10 @@ export default function WalletPage() {
         </TableContainer>
     }
 
-
-
     return (
         <Container className={styles.marginTop}>
             {spinner}
             {content}
         </Container>
-
     )
 }

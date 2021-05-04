@@ -39,7 +39,8 @@ export default function App() {
         <Route exact path='/edit-wallet/:username/:walletId' component={EditWalletPage}/>
         <Route exact path='/wallets/:username' component={HomePage} />
         <Route path='/add-value' component={AddPage} />
-        <Route path='/signin' component={SignInPage}/>
+        <Route path='/signin' 
+        component={() => <SignInPage isLoggedIn={user} />} />
         <Route path='/signup' component={SignUpPage}/>
         <Route>
           <NotFound/>

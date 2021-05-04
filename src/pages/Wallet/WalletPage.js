@@ -5,13 +5,15 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { Button, Container } from "@material-ui/core";
+import { Button, Container, Typography } from "@material-ui/core";
 import styles from "./WalletPage.module.css";
 import { WalletContentByWalletId } from "../../services/walletService";
 import { useEffect, useState } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
 import CompanyList from "../../components/CompanyList/CompanyList";
 import Circular from "../../components/Circular/Circular";
+import {useLocation} from "react-router-dom";
+
 
 export default function WalletPage() {
   const [walletContent, setWalletContent] = useState([]);
@@ -20,6 +22,9 @@ export default function WalletPage() {
   const history = useHistory();
   const { username } = useParams();
   const { walletId } = useParams();
+
+  const search = useLocation().search;
+  const walletName = new URLSearchParams(search).get('walletName');
 
   useEffect(() => {
     (async () => {
@@ -52,7 +57,7 @@ export default function WalletPage() {
             </TableRow>
           </TableHead>
           <TableBody>
-            <CompanyList datas={walletContent} />
+            <CompanyList datas={walletContent} walletName={walletName} />
           </TableBody>
         </Table>
       </TableContainer>
@@ -61,11 +66,18 @@ export default function WalletPage() {
 
   return (
     <Container className={styles.marginTop}>
+      <Typography variant='h4'>{walletName}</Typography>
+      <br/>
       {spinner}
       {content}
       <Link to={`/add-value`} className={styles.none}>
-        <Button color="secondary" variant="outlined" className={styles.mt}>
+        <Button color="primary" variant="outlined" className={styles.mt} style={{margin: 2}}>
           {"Add a stock value"}{" "}
+        </Button>
+      </Link>
+      <Link to={`/wallets/${username}`} className={styles.none}>
+        <Button color="secondary" variant="outlined" className={styles.mt} style={{margin: 2}}>
+          {"Back"}{" "}
         </Button>
       </Link>
     </Container>

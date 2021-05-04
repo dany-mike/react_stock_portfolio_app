@@ -4,12 +4,13 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { Container } from "@material-ui/core";
+import { Button, Container } from "@material-ui/core";
 import styles from "./AboutCompanyPage.module.css";
 import { useParams, useHistory } from "react-router-dom";
 import { getCompanyBySymbol } from "../../services/stockService";
 import { useState, useEffect } from "react";
 import Circular from "../../components/Circular/Circular";
+import {useLocation, Link} from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -38,6 +39,9 @@ export default function AboutCompanyPage() {
   const { username } = useParams();
   const { walletId } = useParams();
   const { symbol } = useParams();
+
+  const search = useLocation().search;
+  const walletName = new URLSearchParams(search).get('walletName');
 
   useEffect(() => {
     (async () => {
@@ -113,6 +117,11 @@ export default function AboutCompanyPage() {
     <Container className={styles.marginTop}>
       {content}
       {spinner}
+      <Link to={`/wallet/${username}/${walletId}?walletName=${walletName}`} className={styles.none}>
+        <Button color="secondary" variant="outlined" className={styles.mt} style={{margin: 2}}>
+          {"Back"}{" "}
+        </Button>
+      </Link>
     </Container>
   );
 }

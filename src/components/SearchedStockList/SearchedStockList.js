@@ -1,4 +1,4 @@
-import { Card, Typography, CardContent } from "@material-ui/core";
+import { Card, Typography, CardContent, CardActions } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -27,20 +27,33 @@ const useStyles = makeStyles({
 
 export default function SearchedStockList({ companies, price }) {
   const classes = useStyles();
-  return <>
-        {companies.map((company) => (
-
-      <Card className={classes.posT} variant="outlined" key={company._id}>
-        <CardContent>
-          <Typography
-            className={classes.title}
-            color="textSecondary"
-            gutterBottom
-          >
-            {company.Name} | {company.Symbol} | {company.Sector}
-          </Typography>
-        </CardContent>
-      </Card>
-     ))}
+  return (
+    <>
+      {companies.map((company) => (
+        <Card className={classes.posT} variant="outlined" key={company._id}>
+          <CardContent>
+            <Typography
+              className={classes.title}
+              color="textSecondary"
+              gutterBottom
+            >
+              {company.Name} | {company.Symbol} | {company.Sector}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Link to={`/add-value/${username}/${walletId}/${company.Symbol}`} className={styles.none}>
+              <Button
+                color="secondary"
+                variant="outlined"
+                className={styles.mt}
+                style={{ margin: 2 }}
+              >
+                {"Back"}{" "}
+              </Button>
+            </Link>
+          </CardActions>
+        </Card>
+      ))}
     </>
+  );
 }

@@ -8,11 +8,12 @@ import SignInPage from './pages/SignIn/SignInPage'
 import SignUpPage from './pages/SignUp/SignUpPage'
 import {HomePage} from './pages/Home/HomePage'
 import NotFound from './components/NotFound/NotFound'
+import AboutCompanyPage from './pages/AboutCompany/AboutCompanyPage';
+import SearchPage from './pages/SearchPage/SearchPage';
+import AddValuePage from './pages/AddValue/AddValuePage'
 
 import {useEffect, useState} from 'react'
 import {isUser} from './services/authenticationService'
-import AboutCompanyPage from './pages/AboutCompany/AboutCompanyPage';
-import SearchPage from './pages/SearchPage/SearchPage';
 
 export default function App() {
 
@@ -38,7 +39,8 @@ export default function App() {
         <Route exact path='/add-wallet/:username' component={AddWalletPage}/>
         <Route exact path='/edit-wallet/:username/:walletId' component={EditWalletPage}/>
         <Route exact path='/wallets/:username' component={HomePage} />
-        <Route path='/add-value' component={SearchPage} />
+        <Route path='/search-page/:username/:walletId' component={SearchPage} />
+        <Route path='/add-value/:username/:walletId/:symbol' component={AddValuePage} />
         <Route path='/signin' 
         component={() => <SignInPage isLoggedIn={user} />} />
         <Route path='/signup' component={SignUpPage}/>
@@ -49,5 +51,3 @@ export default function App() {
     </Router>
   )
 }
-
-

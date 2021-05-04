@@ -70,9 +70,9 @@ export default function WalletPage() {
       <br/>
       {spinner}
       {content}
-      <Link to={`/add-value`} className={styles.none}>
+      <Link to={`/search-page/${username}/${walletId}`} className={styles.none}>
         <Button color="primary" variant="outlined" className={styles.mt} style={{margin: 2}}>
-          {"Add a stock value"}{" "}
+          {"Search a stock value to add"}{" "}
         </Button>
       </Link>
       <Link to={`/wallets/${username}`} className={styles.none}>

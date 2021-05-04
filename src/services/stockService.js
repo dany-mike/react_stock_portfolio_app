@@ -30,19 +30,17 @@ export const searchValueByName = async (nameValue) => {
   return company
 };
 
-// export const endOfTheDayPrice = async (symbol) => {
-//   let pricePerShare = 0
+export const companyProfileBySymbol = async (symbol) => {
+  let companyInfo
 
-//   const response = await axios.get(
-//     `http://localhost:3000/marketstack/eod-price/${symbol}/`,
-//     {
-//       withCredentials: true,
-//     }
-//   );
+  const response = await axios.get(
+    `http://localhost:3000/fm-api/profile/${symbol}`,
+    {
+      withCredentials: true,
+    }
+  );
 
-//   pricePerShare = response.data.data[0].open;
+  companyInfo = response.data;
 
-//   console.log(pricePerShare)
-
-//   return pricePerShare
-// }
+  return companyInfo
+}

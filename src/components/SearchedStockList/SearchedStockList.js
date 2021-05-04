@@ -1,5 +1,5 @@
 import { Card, Typography, CardContent } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   root: {
@@ -20,32 +20,27 @@ const useStyles = makeStyles({
     marginTop: 12,
   },
   subtitle: {
-      fontSize: 32,
-      fontWeight: 'bold'
-  }
+    fontSize: 32,
+    fontWeight: "bold",
+  },
 });
 
-export default function SearchedStockList() {
-
+export default function SearchedStockList({ companies, price }) {
   const classes = useStyles();
-
   return <>
-     <Card className={classes.posT} variant='outlined'>
-       <CardContent>
-         <Typography
-           className={classes.title}
-           color="textSecondary"
-           gutterBottom
-         >
-           Name |  Symbol | Sector
-         </Typography>
-         <Typography
-           className={classes.subtitle}
-           gutterBottom
-         >
-           $Price
-         </Typography>
-       </CardContent>
-     </Card>
-  </>
+        {companies.map((company) => (
+
+      <Card className={classes.posT} variant="outlined" key={company._id}>
+        <CardContent>
+          <Typography
+            className={classes.title}
+            color="textSecondary"
+            gutterBottom
+          >
+            {company.Name} | {company.Symbol} | {company.Sector}
+          </Typography>
+        </CardContent>
+      </Card>
+     ))}
+    </>
 }

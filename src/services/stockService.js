@@ -19,15 +19,30 @@ export const searchValueByName = async (nameValue) => {
   let company;
 
   const response = await axios.get(
-    `http://localhost:3000/search?Name=${nameValue}`,
+    `http://localhost:3000/search?name=${nameValue}`,
     {
       withCredentials: true,
     }
   );
 
-  company = response;
-
-  console.log(company)
+  company = response.data;
 
   return company
 };
+
+// export const endOfTheDayPrice = async (symbol) => {
+//   let pricePerShare = 0
+
+//   const response = await axios.get(
+//     `http://localhost:3000/marketstack/eod-price/${symbol}/`,
+//     {
+//       withCredentials: true,
+//     }
+//   );
+
+//   pricePerShare = response.data.data[0].open;
+
+//   console.log(pricePerShare)
+
+//   return pricePerShare
+// }

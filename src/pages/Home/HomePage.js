@@ -17,7 +17,6 @@ export const HomePage = () => {
   useEffect(() => {
     (async () => {
       try {
-        console.log(loading)
         setWallets(await getWalletsByUsername(username));
         setLoading(false);
       } catch (err) {

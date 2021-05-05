@@ -63,14 +63,13 @@ export default function WalletPage() {
       </TableContainer>
     );
   }
-
   return (
     <Container className={styles.marginTop}>
       <Typography variant='h4'>{walletName}</Typography>
       <br/>
       {spinner}
       {content}
-      <Link to={`/search-page/${username}/${walletId}`} className={styles.none}>
+      <Link to={{pathname: `/search-page/${username}/${walletId}`}} className={styles.none}>
         <Button color="primary" variant="outlined" className={styles.mt} style={{margin: 2}}>
           {"Search a stock value to add"}{" "}
         </Button>

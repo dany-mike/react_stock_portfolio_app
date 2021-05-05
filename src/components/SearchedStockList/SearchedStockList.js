@@ -1,5 +1,13 @@
-import { Card, Typography, CardContent, CardActions } from "@material-ui/core";
+import {
+  Card,
+  Typography,
+  CardContent,
+  CardActions,
+  Button,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link, useParams, useHistory } from "react-router-dom";
+import styles from "./SearchedStockList.module.css";
 
 const useStyles = makeStyles({
   root: {
@@ -25,8 +33,17 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SearchedStockList({ companies, price }) {
+export default function SearchedStockList({ companies }) {
   const classes = useStyles();
+  const { username } = useParams();
+  const { walletId } = useParams();
+  const history = useHistory();
+
+  const handleGoBack = (e) => {
+    e.preventDefault();
+    history.goBack()
+  }
+
   return (
     <>
       {companies.map((company) => (
@@ -41,19 +58,31 @@ export default function SearchedStockList({ companies, price }) {
             </Typography>
           </CardContent>
           <CardActions>
-            <Link to={`/add-value/${username}/${walletId}/${company.Symbol}`} className={styles.none}>
+            <Link
+              to={`/add-value/${username}/${walletId}/${company.Symbol}`}
+              className={styles.none}
+            >
               <Button
-                color="secondary"
+                color="primary"
                 variant="outlined"
                 className={styles.mt}
                 style={{ margin: 2 }}
               >
-                {"Back"}{" "}
+                {"Add this value"}{" "}
               </Button>
             </Link>
           </CardActions>
         </Card>
       ))}
+        <Button
+          onClick={handleGoBack}
+          color="secondary"
+          variant="outlined"
+          className={styles.mt}
+          style={{ margin: 2 }}
+        >
+          {"Back"}{" "}
+        </Button>
     </>
   );
 }

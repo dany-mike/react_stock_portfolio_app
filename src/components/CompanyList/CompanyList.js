@@ -8,8 +8,7 @@ import  {useParams, Link} from 'react-router-dom'
 export default function CompanyList({datas, walletName}) {
     const {username} = useParams()
     const {walletId} = useParams()
-
-    console.log(datas)
+    
     return <>
         {datas.map((data) => (
         <TableRow key={data._id}>

@@ -27,20 +27,25 @@ export const searchValueByName = async (nameValue) => {
 
   company = response.data;
 
-  return company
+  return company;
 };
 
-export const companyProfileBySymbol = async (symbol) => {
-  let companyInfo
+export const getStockPricesBySymbol = async (symbol) => {
+  let aPrices;
 
-  const response = await axios.get(
-    `http://localhost:3000/fm-api/profile/${symbol}`,
-    {
-      withCredentials: true,
-    }
-  );
+  const response = await axios.get(`http://localhost:3000/marketstack/eod-price/${symbol}/`)
 
-  companyInfo = response.data;
+  aPrices = response.data.data
 
-  return companyInfo
+  return aPrices
+}
+
+export const getStockNameBySymbol = async (symbol) => {
+  let stockName;
+
+  const response = await axios.get(`http://localhost:3000/search/company-name/${symbol}`)
+
+  stockName = response.data
+
+  return stockName
 }

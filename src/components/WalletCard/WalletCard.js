@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import styles from "./WalletCard.module.css"
 import {useState, useEffect} from 'react'
-import {deleteWalletByWalletId} from '../../services/walletService'
+import {deleteWalletByWalletId, getWalletById} from '../../services/walletService'
 
 const useStyles = makeStyles({
   title: {
@@ -37,9 +37,10 @@ export default function WalletCard(props) {
     }
 }, [deleteWallet, props._id, username, history])
 
-  const handleGoWallet = (e) => {
+  const handleGoWallet = async (e) => {
     e.preventDefault()
-    history.push(`/wallet/${username}/${props._id}`)
+    const walletData = await getWalletById(username, props._id)
+    history.push(`/wallet/${username}/${props._id}?walletName=${walletData.walletName}`)
   }
 
   const handleClickEdit = (e) => {

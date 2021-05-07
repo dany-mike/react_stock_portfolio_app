@@ -1,11 +1,11 @@
-import { makeStyles } from '@material-ui/core/styles';
-import {Link} from 'react-router-dom'
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import styles from './Header.module.css'
-import {logout} from '../../services/authenticationService'
+import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import styles from "./Header.module.css";
+import { logout } from "../../services/authenticationService";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,21 +20,38 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const logoutFunc = async () => {
-    await logout()
-    document.location.reload();
-}
+  await logout();
+  document.location.reload();
+};
 
-export default function Header({isLoggedIn}) {
+export default function Header({ isLoggedIn }) {
   const classes = useStyles();
 
-  let signsButtons
-  let logout
+  let signsButtons;
+  let logout;
 
-  if(!isLoggedIn) {
-    signsButtons = <><Link variant="body2" to='/signin' className={styles.menu}><Button color="inherit">Sign In</Button></Link>
-    <Link variant="body2" to='/signup' className={styles.menu}><Button color="inherit">Sign Up</Button></Link></>
+  if (!isLoggedIn) {
+    signsButtons = (
+      <>
+        <Link variant="body2" to="/signin" className={styles.menu}>
+          <Button color="inherit">Sign In</Button>
+        </Link>
+        <Link variant="body2" to="/signup" className={styles.menu}>
+          <Button color="inherit">Sign Up</Button>
+        </Link>
+      </>
+    );
   } else {
-    logout = <Link variant="body2" to='/signin' className={styles.menu} onClick={logoutFunc}><Button color="inherit">Logout</Button></Link>
+    logout = (
+      <Link
+        variant="body2"
+        to="/signin"
+        className={styles.menu}
+        onClick={logoutFunc}
+      >
+        <Button color="inherit">Logout</Button>
+      </Link>
+    );
   }
 
   return (

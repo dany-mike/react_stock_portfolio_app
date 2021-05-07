@@ -10,10 +10,11 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Alert from '@material-ui/lab/Alert';
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import {getUser, signin, signup} from '../../services/authenticationService'
 import styles from './Auth.module.css'
+import {logout} from '../../services/authenticationService'
 
 function Copyright() {
     return (
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Auth({authType}) {
+export default function Auth({authType, isLoggedIn}) {
 
     const classes = useStyles();
     const history = useHistory()
@@ -60,6 +61,13 @@ export default function Auth({authType}) {
     })
 
     const [resObject, setResObject] = useState({})
+
+    useEffect(() => {
+        if(isLoggedIn) {
+            logout().then(c => c)
+            document.location.reload()
+        }
+    })
 
     const handleChange = (e) => {
         const { name, value } = e.target;

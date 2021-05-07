@@ -5,11 +5,10 @@ import  {useParams, Link} from 'react-router-dom'
 
 
 
-export default function CompanyList({datas}) {
+export default function CompanyList({datas, walletName}) {
     const {username} = useParams()
     const {walletId} = useParams()
-
-    console.log(datas)
+    
     return <>
         {datas.map((data) => (
         <TableRow key={data._id}>
@@ -19,7 +18,7 @@ export default function CompanyList({datas}) {
             <TableCell>${data.forecastPrice}</TableCell>
             <TableCell>{data.sharesNumber}</TableCell>
             <TableCell>{data.activityArea}</TableCell>
-            <TableCell><Link to={`/about-company/${username}/${walletId}/${data.symbol}`} style={{ color: 'inherit', textDecoration: 'inherit'}}><Button variant="outlined">About {data.symbol}</Button></Link></TableCell>
+            <TableCell><Link to={`/about-company/${username}/${walletId}/${data.symbol}?walletName=${walletName}`} style={{ color: 'inherit', textDecoration: 'inherit'}}><Button variant="outlined">About {data.symbol}</Button></Link></TableCell>
         </TableRow>
         ))} 
     </>

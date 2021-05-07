@@ -1,9 +1,9 @@
 import Auth from "../../components/Auth/Auth";
 
-export default function SignInPage() {
+export default function SignInPage({isLoggedIn}) {
     return (
         <div>
-            <Auth authType="signin"/>
+            <Auth authType="signin" isLoggedIn={isLoggedIn}/>
         </div>
     )
 }

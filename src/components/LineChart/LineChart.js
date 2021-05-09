@@ -4,7 +4,9 @@ import styles from './LineChart.module.css'
 const LineChart = ({ prices, profil}) => {
 
   const data = {
-    labels: prices.map(price => price.date),
+    labels: prices.map(price => {
+      return price.date
+    }),
     datasets: [
       {
         label: `Price ${profil.Symbol}`,

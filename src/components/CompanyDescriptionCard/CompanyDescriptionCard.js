@@ -20,7 +20,7 @@ export default function CompanyDescriptionCard({ data, profil }) {
           variant="outlined"
           onClick={onCheckPrice}
         >
-          Check Detailed price
+          Check detailed price
         </Button>
       </CardActions>
     </Card>

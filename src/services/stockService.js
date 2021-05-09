@@ -59,10 +59,17 @@ export const getStockNameBySymbol = async (symbol) => {
 };
 
 export const addStockIntoWallet = async (symbol, walletId, username, sharesNumber) => {
-  await axios.post(
+  return await axios.post(
     `http://localhost:3000/wallet/add-stock/${username}/${walletId}/${symbol}`, {
       sharesNumber: sharesNumber
     }, {
       withCredentials: true
     });
 };
+
+export const deleteStockInWallet = async (username, walletId, symbol) => {
+  await axios.delete(
+    `http://localhost:3000/wallet/delete-stock/${username}/${walletId}/${symbol}`, {
+      withCredentials: true
+    });
+}

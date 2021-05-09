@@ -1,25 +1,21 @@
-import { Button} from '@material-ui/core';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import  {useParams, Link} from 'react-router-dom'
+import CompanyItem from "../CompanyItem/CompanyItem";
 
+export default function CompanyList({ datas }) {
 
-
-export default function CompanyList({datas, walletName}) {
-    const {username} = useParams()
-    const {walletId} = useParams()
-    
-    return <>
-        {datas.map((data) => (
-        <TableRow key={data._id}>
-            <TableCell>{data.companyName}</TableCell>
-            <TableCell>{data.symbol}</TableCell>
-            <TableCell>${data.stockPrice}</TableCell>
-            <TableCell>${data.forecastPrice}</TableCell>
-            <TableCell>{data.sharesNumber}</TableCell>
-            <TableCell>{data.activityArea}</TableCell>
-            <TableCell><Link to={`/about-company/${username}/${walletId}/${data.symbol}?walletName=${walletName}`} style={{ color: 'inherit', textDecoration: 'inherit'}}><Button variant="outlined">About {data.symbol}</Button></Link></TableCell>
-        </TableRow>
-        ))} 
+  return (
+    <>
+      {datas !== [] &&
+        datas.map((data) => (
+          <CompanyItem
+            key={data._id}
+            companyName={data.companyName}
+            symbol={data.symbol}
+            stockPrice={data.stockPrice}
+            forecastPrice={data.forecastPrice}
+            sharesNumber={data.sharesNumber}
+            activityArea={data.activityArea}
+          />
+        ))}
     </>
+  );
 }

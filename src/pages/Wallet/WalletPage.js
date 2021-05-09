@@ -54,6 +54,9 @@ export default function WalletPage() {
               <TableCell>Stock Price(forecast 1y)</TableCell>
               <TableCell>Shares Number</TableCell>
               <TableCell>Activity Area</TableCell>
+              <TableCell>About</TableCell>
+              <TableCell>Edit</TableCell>
+              <TableCell>Delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

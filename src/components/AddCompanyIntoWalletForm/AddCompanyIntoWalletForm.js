@@ -4,14 +4,17 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import styles from "./AddCompanyIntoWalletForm.module.css";
 import { useParams, useHistory } from "react-router-dom";
 import { useState } from "react";
-import { addStockIntoWallet } from "../../services/stockService";
 
-export default function AddCompanyIntoWalletForm({ data, profil }) {
+import { addStockIntoWallet } from "../../services/stockService";
+import Alert from "@material-ui/lab/Alert";
+
+export default function AddCompanyIntoWalletForm({ data, profil, wallet }) {
   const history = useHistory();
   const { symbol } = useParams();
   const { walletId } = useParams();
   const { username } = useParams();
   const [sharesNumber, setSharesNumber] = useState(0);
+  const [res, setRes] = useState({})
 
   const handleIncrement = () => {
     setSharesNumber(sharesNumber + 1);
@@ -23,7 +26,7 @@ export default function AddCompanyIntoWalletForm({ data, profil }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addStockIntoWallet(symbol, walletId, username, sharesNumber);
+    addStockIntoWallet(symbol, walletId, username, sharesNumber).then(res => setRes(res))
   };
 
   const handleGoBack = (e) => {
@@ -32,6 +35,12 @@ export default function AddCompanyIntoWalletForm({ data, profil }) {
   };
 
   const displayCounter = sharesNumber > 0;
+
+  let alertSuccess;
+
+  if(res.status === 200) {
+    alertSuccess = <Alert severity="success" className={styles.marginTopOne}>{res.data}</Alert>
+  } 
 
   return (
     <>
@@ -80,6 +89,7 @@ export default function AddCompanyIntoWalletForm({ data, profil }) {
             </Button>
           </CardActions>
         </form>
+        {alertSuccess}
       </Card>
     </>
   );

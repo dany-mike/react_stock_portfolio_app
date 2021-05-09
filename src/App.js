@@ -11,6 +11,7 @@ import NotFound from './components/NotFound/NotFound'
 import AboutCompanyPage from './pages/AboutCompany/AboutCompanyPage';
 import SearchPage from './pages/SearchPage/SearchPage';
 import AddValuePage from './pages/AddValue/AddValuePage'
+import EditCompanyPage from './pages/EditCompany/EditCompanyPage'
 
 import {useEffect, useState} from 'react'
 import {isUser} from './services/authenticationService'
@@ -41,6 +42,7 @@ export default function App() {
         <Route exact path='/wallets/:username' component={HomePage} />
         <Route path='/search-page/:username/:walletId' component={SearchPage} />
         <Route path='/add-value/:username/:walletId/:symbol' component={AddValuePage} />
+        <Route path='/edit-company/:username/:walletId/:symbol' component={EditCompanyPage}/>
         <Route path='/signin' 
         component={() => <SignInPage isLoggedIn={user} />} />
         <Route path='/signup' component={SignUpPage}/>

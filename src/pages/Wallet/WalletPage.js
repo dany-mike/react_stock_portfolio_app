@@ -14,7 +14,6 @@ import CompanyList from "../../components/CompanyList/CompanyList";
 import Circular from "../../components/Circular/Circular";
 import {useLocation} from "react-router-dom";
 
-
 export default function WalletPage() {
   const [walletContent, setWalletContent] = useState([]);
   const [loading, setLoading] = useState(true);

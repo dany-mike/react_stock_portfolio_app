@@ -34,8 +34,9 @@ export const getStockPricesBySymbol = async (symbol) => {
   let aPrices;
 
   const response = await axios.get(
-    `http://localhost:3000/marketstack/eod-price/${symbol}/`, {
-      withCredentials: true
+    `http://localhost:3000/marketstack/eod-price/${symbol}/`,
+    {
+      withCredentials: true,
     }
   );
 
@@ -48,8 +49,9 @@ export const getStockNameBySymbol = async (symbol) => {
   let stockName;
 
   const response = await axios.get(
-    `http://localhost:3000/search/company-name/${symbol}`, {
-      withCredentials: true
+    `http://localhost:3000/search/company-name/${symbol}`,
+    {
+      withCredentials: true,
     }
   );
 
@@ -58,18 +60,40 @@ export const getStockNameBySymbol = async (symbol) => {
   return stockName;
 };
 
-export const addStockIntoWallet = async (symbol, walletId, username, sharesNumber) => {
+export const addStockIntoWallet = async (
+  symbol,
+  walletId,
+  username,
+  sharesNumber
+) => {
   return await axios.post(
-    `http://localhost:3000/wallet/add-stock/${username}/${walletId}/${symbol}`, {
-      sharesNumber: sharesNumber
-    }, {
-      withCredentials: true
-    });
+    `http://localhost:3000/wallet/add-stock/${username}/${walletId}/${symbol}`,
+    {
+      sharesNumber: sharesNumber,
+    },
+    {
+      withCredentials: true,
+    }
+  );
 };
 
 export const deleteStockInWallet = async (username, walletId, symbol) => {
   await axios.delete(
-    `http://localhost:3000/wallet/delete-stock/${username}/${walletId}/${symbol}`, {
-      withCredentials: true
-    });
-}
+    `http://localhost:3000/wallet/delete-stock/${username}/${walletId}/${symbol}`,
+    {
+      withCredentials: true,
+    }
+  );
+};
+
+export const editStock = async (username, walletId, symbol, sharesNumber) => {
+  return await axios.patch(
+    `http://localhost:3000/wallet/edit-stock/${username}/${walletId}/${symbol}`,
+    {
+      sharesNumber: sharesNumber
+    },
+    {
+      withCredentials: true,
+    }
+  );
+};

@@ -1,7 +1,6 @@
 import CompanyItem from "../CompanyItem/CompanyItem";
 
 export default function CompanyList({ datas }) {
-
   return (
     <>
       {datas !== [] &&

@@ -10,7 +10,6 @@ export default function CompanyItem({
   forecastPrice,
   sharesNumber,
   activityArea,
-  key
 }) {
   const { username } = useParams();
   const { walletId } = useParams();
@@ -23,8 +22,9 @@ export default function CompanyItem({
     }
   };
 
+
   return (
-    <TableRow key={key}>
+    <TableRow>
       <TableCell>{companyName}</TableCell>
       <TableCell>{symbol}</TableCell>
       <TableCell>${stockPrice}</TableCell>
@@ -41,7 +41,7 @@ export default function CompanyItem({
       </TableCell>
       <TableCell>
         <Link
-          to={`/about-company/${username}/${walletId}/${symbol}`}
+          to={`/edit-company/${username}/${walletId}/${symbol}`}
           style={{ color: "inherit", textDecoration: "inherit" }}
         >
           <Button variant="outlined">Edit</Button>

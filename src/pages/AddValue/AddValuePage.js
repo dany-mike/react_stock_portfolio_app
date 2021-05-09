@@ -31,7 +31,7 @@ export default function AddValuePage() {
       setLoading(false);
     }
     getDatas();
-  }, [symbol, walletId]);
+  }, [symbol, walletId, username]);
 
   let circular;
   let content;

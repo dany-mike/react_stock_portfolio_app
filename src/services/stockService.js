@@ -33,19 +33,36 @@ export const searchValueByName = async (nameValue) => {
 export const getStockPricesBySymbol = async (symbol) => {
   let aPrices;
 
-  const response = await axios.get(`http://localhost:3000/marketstack/eod-price/${symbol}/`)
+  const response = await axios.get(
+    `http://localhost:3000/marketstack/eod-price/${symbol}/`, {
+      withCredentials: true
+    }
+  );
 
-  aPrices = response.data.data
+  aPrices = response.data.data;
 
-  return aPrices
-}
+  return aPrices;
+};
 
 export const getStockNameBySymbol = async (symbol) => {
   let stockName;
 
-  const response = await axios.get(`http://localhost:3000/search/company-name/${symbol}`)
+  const response = await axios.get(
+    `http://localhost:3000/search/company-name/${symbol}`, {
+      withCredentials: true
+    }
+  );
 
-  stockName = response.data
+  stockName = response.data;
 
-  return stockName
-}
+  return stockName;
+};
+
+export const addStockIntoWallet = async (symbol, walletId, username, sharesNumber) => {
+  await axios.post(
+    `http://localhost:3000/wallet/add-stock/${username}/${walletId}/${symbol}`, {
+      sharesNumber: sharesNumber
+    }, {
+      withCredentials: true
+    });
+};

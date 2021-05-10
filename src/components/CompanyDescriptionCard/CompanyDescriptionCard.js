@@ -2,8 +2,10 @@ import { Card, CardActions, Button } from "@material-ui/core";
 import LineChart from "../LineChart/LineChart";
 
 export default function CompanyDescriptionCard({ data, profil }) {
-  const onCheckHistoricalPrice = (e) => {
+  
+  const onCheckPrice = (e) => {
     e.preventDefault();
+    console.log(e.target)
     window.open(
       `https://www.nasdaq.com/market-activity/stocks/${profil.Symbol}`,
       "_blank"
@@ -16,45 +18,9 @@ export default function CompanyDescriptionCard({ data, profil }) {
       <CardActions>
         <Button
           variant="outlined"
-          onClick={onCheckHistoricalPrice}
+          onClick={onCheckPrice}
         >
-          1 Day
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={onCheckHistoricalPrice}
-        >
-          5 Days
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={onCheckHistoricalPrice}
-        >
-          1 Month
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={onCheckHistoricalPrice}
-        >
-          6 Month
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={onCheckHistoricalPrice}
-        >
-          1 Year
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={onCheckHistoricalPrice}
-        >
-          5 Y
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={onCheckHistoricalPrice}
-        >
-          Max
+          Check detailed price
         </Button>
       </CardActions>
     </Card>

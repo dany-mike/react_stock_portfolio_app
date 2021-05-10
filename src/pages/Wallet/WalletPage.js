@@ -14,7 +14,6 @@ import CompanyList from "../../components/CompanyList/CompanyList";
 import Circular from "../../components/Circular/Circular";
 import {useLocation} from "react-router-dom";
 
-
 export default function WalletPage() {
   const [walletContent, setWalletContent] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -54,6 +53,9 @@ export default function WalletPage() {
               <TableCell>Stock Price(forecast 1y)</TableCell>
               <TableCell>Shares Number</TableCell>
               <TableCell>Activity Area</TableCell>
+              <TableCell>About</TableCell>
+              <TableCell>Edit</TableCell>
+              <TableCell>Delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

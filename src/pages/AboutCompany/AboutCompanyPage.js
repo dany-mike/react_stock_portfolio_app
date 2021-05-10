@@ -10,7 +10,6 @@ import { useParams, useHistory } from "react-router-dom";
 import { getCompanyBySymbol } from "../../services/stockService";
 import { useState, useEffect } from "react";
 import Circular from "../../components/Circular/Circular";
-import {useLocation, Link} from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -40,9 +39,6 @@ export default function AboutCompanyPage() {
   const { walletId } = useParams();
   const { symbol } = useParams();
 
-  const search = useLocation().search;
-  const walletName = new URLSearchParams(search).get('walletName');
-
   useEffect(() => {
     (async () => {
       try {
@@ -53,6 +49,10 @@ export default function AboutCompanyPage() {
       }
     })();
   }, [username, walletId, history, symbol]);
+
+  const goBack = () => {
+    history.goBack()
+  }
 
     let spinner
     let content 
@@ -117,11 +117,9 @@ export default function AboutCompanyPage() {
     <Container className={styles.marginTop}>
       {content}
       {spinner}
-      <Link to={`/wallet/${username}/${walletId}?walletName=${walletName}`} className={styles.none}>
-        <Button color="secondary" variant="outlined" className={styles.mt} style={{margin: 2}}>
+        <Button color="secondary" variant="outlined" onClick={goBack} className={styles.mt} style={{margin: 2}}>
           {"Back"}{" "}
         </Button>
-      </Link>
     </Container>
   );
 }

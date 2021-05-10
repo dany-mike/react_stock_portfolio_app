@@ -1,10 +1,12 @@
 import axios from "axios";
 
+const baseURL = "http://localhost:3000"
+
 export const getCompanyBySymbol = async (username, walletId, symbol) => {
   let company;
 
   const response = await axios.get(
-    `http://localhost:3000/wallet/get-stock/${username}/${walletId}/${symbol}`,
+    `${baseURL}/wallet/get-stock/${username}/${walletId}/${symbol}`,
     {
       withCredentials: true,
     }
@@ -19,7 +21,7 @@ export const searchValueByName = async (nameValue) => {
   let company;
 
   const response = await axios.get(
-    `http://localhost:3000/search?name=${nameValue}`,
+    `${baseURL}/search?name=${nameValue}`,
     {
       withCredentials: true,
     }
@@ -34,7 +36,7 @@ export const getStockPricesBySymbol = async (symbol) => {
   let aPrices;
 
   const response = await axios.get(
-    `http://localhost:3000/marketstack/eod-price/${symbol}/`,
+    `${baseURL}/marketstack/eod-price/${symbol}/`,
     {
       withCredentials: true,
     }
@@ -49,7 +51,7 @@ export const getStockNameBySymbol = async (symbol) => {
   let stockName;
 
   const response = await axios.get(
-    `http://localhost:3000/search/company-name/${symbol}`,
+    `${baseURL}/search/company-name/${symbol}`,
     {
       withCredentials: true,
     }
@@ -67,7 +69,7 @@ export const addStockIntoWallet = async (
   sharesNumber
 ) => {
   return await axios.post(
-    `http://localhost:3000/wallet/add-stock/${username}/${walletId}/${symbol}`,
+    `${baseURL}/wallet/add-stock/${username}/${walletId}/${symbol}`,
     {
       sharesNumber: sharesNumber,
     },
@@ -79,7 +81,7 @@ export const addStockIntoWallet = async (
 
 export const deleteStockInWallet = async (username, walletId, symbol) => {
   await axios.delete(
-    `http://localhost:3000/wallet/delete-stock/${username}/${walletId}/${symbol}`,
+    `${baseURL}/wallet/delete-stock/${username}/${walletId}/${symbol}`,
     {
       withCredentials: true,
     }
@@ -88,7 +90,7 @@ export const deleteStockInWallet = async (username, walletId, symbol) => {
 
 export const editStock = async (username, walletId, symbol, sharesNumber) => {
   return await axios.patch(
-    `http://localhost:3000/wallet/edit-stock/${username}/${walletId}/${symbol}`,
+    `${baseURL}/wallet/edit-stock/${username}/${walletId}/${symbol}`,
     {
       sharesNumber: sharesNumber
     },

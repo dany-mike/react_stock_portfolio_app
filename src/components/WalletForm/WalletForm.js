@@ -25,6 +25,7 @@ export default function WalletForm(props) {
     
   const { username } = useParams();
   const { walletId } = useParams();
+  const baseURL = "http://localhost:3000"
 
   const classes = useStyles();
 
@@ -35,7 +36,7 @@ export default function WalletForm(props) {
 
   useEffect(() => {
     (async () => {
-      if (props.url === "http://localhost:3000/wallet/edit-wallet") {
+      if (props.url === `${baseURL}/wallet/edit-wallet`) {
         setWalletForm(await getWalletById(username, walletId));
       }
     })();
@@ -51,7 +52,7 @@ export default function WalletForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (props.url === "http://localhost:3000/wallet/edit-wallet") {
+    if (props.url === `${baseURL}/wallet/edit-wallet`) {
       await walletByUsernameRequest(
         username,
         walletForm,
@@ -74,7 +75,7 @@ export default function WalletForm(props) {
 
   let button;
 
-  if (props.url === "http://localhost:3000/wallet/edit-wallet") {
+  if (props.url === `${baseURL}/wallet/edit-wallet`) {
     button = (
       <Button variant="outlined" color="primary" type="submit">
         Edit wallet
@@ -90,7 +91,7 @@ export default function WalletForm(props) {
 
   let title;
 
-  if (props.url === "http://localhost:3000/wallet/edit-wallet") {
+  if (props.url === `${baseURL}/wallet/edit-wallet`) {
     title = (
       <Typography variant="h4" component="h2" className={styles.paddingOne}>
         Edit Wallet

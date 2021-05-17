@@ -65,6 +65,7 @@ export default function Auth({authType, isLoggedIn}) {
     useEffect(() => {
         if(isLoggedIn) {
             logout().then(c => c)
+            localStorage.setItem("username", "")
             document.location.reload()
         }
     })
@@ -83,6 +84,7 @@ export default function Auth({authType, isLoggedIn}) {
 
             if(resSign.status === 200) {
                 const resUser = await getUser(resSign.data._id)
+                localStorage.setItem("username", resUser.username)
                 history.push(`/wallets/${resUser.username}`)
                 document.location.reload();
             }

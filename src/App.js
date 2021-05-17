@@ -17,11 +17,10 @@ import AboutCompanyPage from "./pages/AboutCompany/AboutCompanyPage";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import AddValuePage from "./pages/AddValue/AddValuePage";
 import EditCompanyPage from "./pages/EditCompany/EditCompanyPage";
+import FavoritePage from './pages/FavoritePage/FavoritePage'
 
 import { useEffect, useState } from "react";
 import { isUser } from "./services/authenticationService";
-import { Provider } from "react-redux";
-import store from './store'
 
 export default function App() {
   const [user, setUser] = useState(false);
@@ -34,7 +33,6 @@ export default function App() {
   }, []);
 
   return (
-    <Provider store={store}>
       <Router>
         <Header isLoggedIn={user} />
         <Switch>
@@ -76,11 +74,15 @@ export default function App() {
             component={() => <SignInPage isLoggedIn={user} />}
           />
           <Route path="/signup" component={SignUpPage} />
+          <Route
+            path="/favorites/:username/"
+            exact
+            component={FavoritePage}
+          />
           <Route>
             <NotFound />
           </Route>
         </Switch>
       </Router>
-    </Provider>
   );
 }

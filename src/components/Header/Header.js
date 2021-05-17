@@ -44,7 +44,11 @@ export default function Header({ isLoggedIn }) {
   } else {
     logout = (
       <>
-        <Link variant="body2" to={`/favorites/`} className={styles.menu}>
+        <Link
+          variant="body2"
+          to={`/favorites/${localStorage.getItem("username")}`}
+          className={styles.menu}
+        >
           <Button color="inherit">Favorites</Button>
         </Link>
         <Link

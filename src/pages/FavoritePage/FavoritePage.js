@@ -1,4 +1,4 @@
-import { favoriteService } from "../../services/favoriteService";
+import { getFavorites } from "../../services/favoriteService";
 import { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import FavoriteList from "../../components/FavoriteList/FavoriteList";
@@ -20,7 +20,7 @@ export default function FavoritePage() {
   useEffect(() => {
     (async () => {
       try {
-        setFavorites(await favoriteService(username));
+        setFavorites(await getFavorites(username));
         setLoading(false);
       } catch (err) {
         history.push("/signin");

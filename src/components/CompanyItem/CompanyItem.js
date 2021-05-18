@@ -2,38 +2,31 @@ import { Button, TableCell } from "@material-ui/core";
 import { useParams, Link } from "react-router-dom";
 import { deleteStockInWallet } from "../../services/stockService";
 import TableRow from "@material-ui/core/TableRow";
+import Checkbox from "@material-ui/core/Checkbox";
 
-export default function CompanyItem({
-  companyName,
-  symbol,
-  stockPrice,
-  forecastPrice,
-  sharesNumber,
-  activityArea,
-}) {
+export default function CompanyItem({ data, favorites }) {
   const { username } = useParams();
   const { walletId } = useParams();
 
   const onDelete = async () => {
-    let isConfirm = window.confirm("Are you sure to delete this wallet?");
+    let isConfirm = window.confirm("Are you sure to delete this company?");
     if (isConfirm) {
-      await deleteStockInWallet(username, walletId, symbol);
+      await deleteStockInWallet(username, walletId, data.symbol);
       document.location.reload();
     }
   };
 
-
   return (
-    <TableRow>
-      <TableCell>{companyName}</TableCell>
-      <TableCell>{symbol}</TableCell>
-      <TableCell>${stockPrice}</TableCell>
-      <TableCell>${forecastPrice}</TableCell>
-      <TableCell>{sharesNumber}</TableCell>
-      <TableCell>{activityArea}</TableCell>
+    <TableRow key={data._id}>
+      <TableCell>{data.companyName}</TableCell>
+      <TableCell>{data.symbol}</TableCell>
+      <TableCell>${data.stockPrice}</TableCell>
+      <TableCell>${data.forecastPrice}</TableCell>
+      <TableCell>{data.sharesNumber}</TableCell>
+      <TableCell>{data.activityArea}</TableCell>
       <TableCell>
         <Link
-          to={`/about-company/${username}/${walletId}/${symbol}`}
+          to={`/about-company/${username}/${walletId}/${data.symbol}`}
           style={{ color: "inherit", textDecoration: "inherit" }}
         >
           <Button variant="outlined">About</Button>
@@ -41,7 +34,7 @@ export default function CompanyItem({
       </TableCell>
       <TableCell>
         <Link
-          to={`/edit-company/${username}/${walletId}/${symbol}`}
+          to={`/edit-company/${username}/${walletId}/${data.symbol}`}
           style={{ color: "inherit", textDecoration: "inherit" }}
         >
           <Button variant="outlined">Edit</Button>

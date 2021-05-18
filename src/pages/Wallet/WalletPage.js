@@ -13,14 +13,17 @@ import { useParams, useHistory, Link } from "react-router-dom";
 import CompanyList from "../../components/CompanyList/CompanyList";
 import Circular from "../../components/Circular/Circular";
 import {useLocation} from "react-router-dom";
+import {getFavorites} from "../../services/favoriteService"
 
 export default function WalletPage() {
   const [walletContent, setWalletContent] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [favorites, setFavorites] = useState([]);
 
   const history = useHistory();
   const { username } = useParams();
   const { walletId } = useParams();
+
 
   const search = useLocation().search;
   const walletName = new URLSearchParams(search).get('walletName');
@@ -29,6 +32,7 @@ export default function WalletPage() {
     (async () => {
       try {
         setWalletContent(await WalletContentByWalletId(username, walletId));
+        setFavorites(await getFavorites(username))
         setLoading(false);
       } catch (err) {
         history.push("/signin");
@@ -59,7 +63,7 @@ export default function WalletPage() {
             </TableRow>
           </TableHead>
           <TableBody>
-            <CompanyList datas={walletContent} walletName={walletName} />
+            <CompanyList data={walletContent} walletName={walletName} favorites={favorites}/>
           </TableBody>
         </Table>
       </TableContainer>

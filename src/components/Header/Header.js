@@ -43,14 +43,23 @@ export default function Header({ isLoggedIn }) {
     );
   } else {
     logout = (
-      <Link
-        variant="body2"
-        to="/signin"
-        className={styles.menu}
-        onClick={logoutFunc}
-      >
-        <Button color="inherit">Logout</Button>
-      </Link>
+      <>
+        <Link
+          variant="body2"
+          to={`/favorites/${localStorage.getItem("username")}`}
+          className={styles.menu}
+        >
+          <Button color="inherit">Favorites</Button>
+        </Link>
+        <Link
+          variant="body2"
+          to="/signin"
+          className={styles.menu}
+          onClick={logoutFunc}
+        >
+          <Button color="inherit">Logout</Button>
+        </Link>
+      </>
     );
   }
 

@@ -68,7 +68,7 @@ export default function SearchedStockList({ companies }) {
                 className={styles.mt}
                 style={{ margin: 2 }}
               >
-                {"Add this value"}{" "}
+                {`Add ${company.Symbol}`}{" "}
               </Button>
             </Link>
           </CardActions>

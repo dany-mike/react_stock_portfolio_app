@@ -4,9 +4,9 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import styles from "./AddCompanyIntoWalletForm.module.css";
 import { useParams, useHistory } from "react-router-dom";
 import { useState } from "react";
-
 import { addStockIntoWallet } from "../../services/stockService";
 import Alert from "@material-ui/lab/Alert";
+import { addFavorite } from "../../services/favoriteService";
 
 export default function AddCompanyIntoWalletForm({ data, profil, wallet }) {
   const history = useHistory();
@@ -14,10 +14,19 @@ export default function AddCompanyIntoWalletForm({ data, profil, wallet }) {
   const { walletId } = useParams();
   const { username } = useParams();
   const [sharesNumber, setSharesNumber] = useState(0);
-  const [res, setRes] = useState({})
+  const [res, setRes] = useState({});
+  const [err, setErr] = useState({});
 
   const handleIncrement = () => {
     setSharesNumber(sharesNumber + 1);
+  };
+
+  const addFav = async () => {
+    try {
+      setRes(await addFavorite(username, symbol));
+    } catch (err) {
+      setErr(err.response);
+    }
   };
 
   const handleDecrement = () => {
@@ -26,7 +35,12 @@ export default function AddCompanyIntoWalletForm({ data, profil, wallet }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addStockIntoWallet(symbol, walletId, username, sharesNumber).then(res => setRes(res))
+    addStockIntoWallet(symbol, walletId, username, sharesNumber)
+      .then((res) => {
+        setRes(res)
+      }).catch((err) => {
+        setErr(err.response)
+      })
   };
 
   const handleGoBack = (e) => {
@@ -35,13 +49,23 @@ export default function AddCompanyIntoWalletForm({ data, profil, wallet }) {
   };
 
   const displayCounter = sharesNumber > 0;
+  let alert;
 
-  let alertSuccess;
+  if (res.status === 200) {
+    alert = (
+      <Alert severity="success" className={styles.marginTopOne}>
+        {res.data}
+      </Alert>
+    );
+  }
 
-  if(res.status === 200) {
-    alertSuccess = <Alert severity="success" className={styles.marginTopOne}>{res.data}</Alert>
-  } 
-
+  if (err.status >= 400 && err.status <= 404) {
+    alert = (
+      <Alert severity="error" className={styles.marginTopOne}>
+        {err.data}
+      </Alert>
+    );
+  }
   return (
     <>
       <Card className={styles.margin} variant="outlined">
@@ -84,12 +108,19 @@ export default function AddCompanyIntoWalletForm({ data, profil, wallet }) {
             <Button variant="outlined" color="primary" type="submit">
               Add {symbol}
             </Button>
+            <Button
+              variant="outlined"
+              onClick={addFav}
+              style={{ color: "#815cff" }}
+            >
+              Add {symbol} into fav
+            </Button>
             <Button variant="outlined" color="secondary" onClick={handleGoBack}>
               Back
             </Button>
           </CardActions>
         </form>
-        {alertSuccess}
+        {alert}
       </Card>
     </>
   );

@@ -32,3 +32,15 @@ export const removeFavorite = async (username, symbol) => {
   
     return favorites;
 };
+
+export const addFavorite = async (username, symbol) => {
+    return await axios.post(
+      `${baseURL}/favorite/add/${username}/${symbol}`, 
+      {
+
+      },
+      {
+        withCredentials: true,
+      }
+    );
+};

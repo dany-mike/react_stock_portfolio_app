@@ -1,20 +1,14 @@
 import CompanyItem from "../CompanyItem/CompanyItem";
 
-export default function CompanyList({ datas }) {
+export default function CompanyList({ data, favorites }) {
   return (
     <>
-      {datas !== [] &&
-        datas.map((data) => (
-          <CompanyItem
-            key={data._id}
-            companyName={data.companyName}
-            symbol={data.symbol}
-            stockPrice={data.stockPrice}
-            forecastPrice={data.forecastPrice}
-            sharesNumber={data.sharesNumber}
-            activityArea={data.activityArea}
-          />
-        ))}
+      {data !== [] &&
+        data.map((data) => {
+              return (
+                <CompanyItem key={data._id} data={data} favorites={favorites} />
+              );
+        })}
     </>
   );
 }

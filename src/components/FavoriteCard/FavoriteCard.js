@@ -25,7 +25,7 @@ export default function FavoriteCard({ data }) {
     );
 
     if (confirm === true) {
-      console.log(await removeFavorite(username, data.symbol));
+      await removeFavorite(username, data.symbol)
       document.location.reload()
     }
   };

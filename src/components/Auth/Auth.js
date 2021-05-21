@@ -66,6 +66,7 @@ export default function Auth({authType, isLoggedIn}) {
         if(isLoggedIn) {
             logout().then(c => c)
             localStorage.setItem("username", "")
+            localStorage.setItem("token", "")
             document.location.reload()
         }
     })
@@ -81,9 +82,9 @@ export default function Auth({authType, isLoggedIn}) {
 
         if(authType === "signin") {
             const resSign = await signin(auth)
-
             if(resSign.status === 200) {
-                const resUser = await getUser(resSign.data._id)
+                const resUser = await getUser(resSign.data[1].verified._id)
+                localStorage.setItem("token", resSign.data[0].token)
                 localStorage.setItem("username", resUser.username)
                 history.push(`/wallets/${resUser.username}`)
                 document.location.reload();

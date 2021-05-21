@@ -2,12 +2,15 @@ import axios from 'axios';
 
 // const baseURL = "https://stock-portfolio-app-api.herokuapp.com"
 const baseURL = "http://localhost:3000"
+const token = localStorage.getItem("token")
 
 
 export const signin = async (body) => {
     try {
         return await axios.post(`${baseURL}/user/login`, body,  {
-            withCredentials: true
+            headers: {
+                'Authorization': `${token}`
+            }
         })
     } catch(err) {
         return err.response
@@ -41,7 +44,9 @@ export const isUser = async () => {
     let check = false
 
     const response = await axios.get(`${baseURL}/user/check`, {
-        withCredentials: true
+        headers: {
+            'Authorization': `${token}`
+        }
     })
 
     check = response
@@ -51,7 +56,9 @@ export const isUser = async () => {
 
 export const logout = async () => {
         const response = await axios.get(`${baseURL}/user/logout`, {
-            withCredentials: true
+            headers: {
+                'Authorization': `${token}`
+            }
         })
         return response
 }

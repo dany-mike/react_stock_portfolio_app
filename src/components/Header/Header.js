@@ -26,22 +26,10 @@ const logoutFunc = async () => {
 
 export default function Header({ isLoggedIn }) {
   const classes = useStyles();
-
   let signsButtons;
   let logout;
 
-  if (!isLoggedIn) {
-    signsButtons = (
-      <>
-        <Link variant="body2" to="/signin" className={styles.menu}>
-          <Button color="inherit">Sign In</Button>
-        </Link>
-        <Link variant="body2" to="/signup" className={styles.menu}>
-          <Button color="inherit">Sign Up</Button>
-        </Link>
-      </>
-    );
-  } else {
+  if (isLoggedIn) {
     logout = (
       <>
         <Link
@@ -58,6 +46,18 @@ export default function Header({ isLoggedIn }) {
           onClick={logoutFunc}
         >
           <Button color="inherit">Logout</Button>
+        </Link>
+      </>
+    );
+  }
+  if(!isLoggedIn) {
+    signsButtons = (
+      <>
+        <Link variant="body2" to="/signin" className={styles.menu}>
+          <Button color="inherit">Sign In</Button>
+        </Link>
+        <Link variant="body2" to="/signup" className={styles.menu}>
+          <Button color="inherit">Sign Up</Button>
         </Link>
       </>
     );

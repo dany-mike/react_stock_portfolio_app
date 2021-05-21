@@ -5,7 +5,6 @@ export default function CompanyDescriptionCard({ data, profil }) {
   
   const onCheckPrice = (e) => {
     e.preventDefault();
-    console.log(e.target)
     window.open(
       `https://www.nasdaq.com/market-activity/stocks/${profil.Symbol}`,
       "_blank"

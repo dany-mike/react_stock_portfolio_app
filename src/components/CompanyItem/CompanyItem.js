@@ -2,9 +2,8 @@ import { Button, TableCell } from "@material-ui/core";
 import { useParams, Link } from "react-router-dom";
 import { deleteStockInWallet } from "../../services/stockService";
 import TableRow from "@material-ui/core/TableRow";
-import Checkbox from "@material-ui/core/Checkbox";
 
-export default function CompanyItem({ data, favorites }) {
+export default function CompanyItem({ data }) {
   const { username } = useParams();
   const { walletId } = useParams();
 

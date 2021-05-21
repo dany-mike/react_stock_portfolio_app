@@ -1,7 +1,7 @@
 import axios from 'axios'
-
-// const baseURL = "https://stock-portfolio-app-api.herokuapp.com"
-const baseURL = "http://localhost:3000"
+const token = localStorage.getItem('token');
+const baseURL = "https://stock-portfolio-app-api.herokuapp.com"
+// const baseURL = "http://localhost:3000"
 
 export const getFavorites = async (username) => {
     let favorites = [];
@@ -9,7 +9,9 @@ export const getFavorites = async (username) => {
     const response = await axios.get(
       `${baseURL}/favorite/${username}`,
       {
-        withCredentials: true,
+        headers: {
+          'Authorization': `${token}`
+        }
       }
     );
   
@@ -24,7 +26,9 @@ export const removeFavorite = async (username, symbol) => {
     const response = await axios.delete(
       `${baseURL}/favorite/delete/${username}/${symbol}`,
       {
-        withCredentials: true,
+        headers: {
+          'Authorization': `${token}`
+        }
       }
     );
   
@@ -40,7 +44,9 @@ export const addFavorite = async (username, symbol) => {
 
       },
       {
-        withCredentials: true,
+        headers: {
+          'Authorization': `${token}`
+        }
       }
     );
 };

@@ -1,7 +1,8 @@
 import axios from "axios";
 
-// const baseURL = "https://stock-portfolio-app-api.herokuapp.com"
-const baseURL = "http://localhost:3000"
+const baseURL = "https://stock-portfolio-app-api.herokuapp.com"
+// const baseURL = "http://localhost:3000"
+const token = localStorage.getItem("token")
 
 
 export const getCompanyBySymbol = async (username, walletId, symbol) => {
@@ -10,7 +11,9 @@ export const getCompanyBySymbol = async (username, walletId, symbol) => {
   const response = await axios.get(
     `${baseURL}/wallet/get-stock/${username}/${walletId}/${symbol}`,
     {
-      withCredentials: true,
+    headers: {
+        'Authorization': `${token}`
+    }
     }
   );
 
@@ -25,7 +28,9 @@ export const searchValueByName = async (nameValue) => {
   const response = await axios.get(
     `${baseURL}/search?name=${nameValue}`,
     {
-      withCredentials: true,
+      headers: {
+        'Authorization': `${token}`
+      }
     }
   );
 
@@ -40,7 +45,9 @@ export const getStockPricesBySymbol = async (symbol) => {
   const response = await axios.get(
     `${baseURL}/marketstack/eod-price/${symbol}/`,
     {
-      withCredentials: true,
+      headers: {
+        'Authorization': `${token}`
+      }
     }
   );
 
@@ -55,7 +62,9 @@ export const getStockNameBySymbol = async (symbol) => {
   const response = await axios.get(
     `${baseURL}/search/company-name/${symbol}`,
     {
-      withCredentials: true,
+      headers: {
+        'Authorization': `${token}`
+      }
     }
   );
 
@@ -76,7 +85,9 @@ export const addStockIntoWallet = async (
       sharesNumber: sharesNumber,
     },
     {
-      withCredentials: true,
+      headers: {
+        'Authorization': `${token}`
+      }
     }
   );
 };
@@ -85,7 +96,9 @@ export const deleteStockInWallet = async (username, walletId, symbol) => {
   await axios.delete(
     `${baseURL}/wallet/delete-stock/${username}/${walletId}/${symbol}`,
     {
-      withCredentials: true,
+      headers: {
+        'Authorization': `${token}`
+      }
     }
   );
 };
@@ -97,7 +110,9 @@ export const editStock = async (username, walletId, symbol, sharesNumber) => {
       sharesNumber: sharesNumber
     },
     {
-      withCredentials: true,
+      headers: {
+        'Authorization': `${token}`
+      }
     }
   );
 };

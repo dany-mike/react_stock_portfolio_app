@@ -15,7 +15,7 @@ export default function AddCompanyIntoWalletForm({ data, profil, wallet }) {
   const { username } = useParams();
   const [sharesNumber, setSharesNumber] = useState(0);
   const [res, setRes] = useState({});
-  const [err, setErr] = useState({});
+  const [error, setError] = useState({});
 
   const handleIncrement = () => {
     setSharesNumber(sharesNumber + 1);
@@ -24,8 +24,9 @@ export default function AddCompanyIntoWalletForm({ data, profil, wallet }) {
   const addFav = async () => {
     try {
       setRes(await addFavorite(username, symbol));
+      // console.log(await addFavorite(username, symbol));
     } catch (err) {
-      setErr(err.response);
+      setError(err.response);
     }
   };
 
@@ -39,7 +40,7 @@ export default function AddCompanyIntoWalletForm({ data, profil, wallet }) {
       .then((res) => {
         setRes(res)
       }).catch((err) => {
-        setErr(err.response)
+        setError(err.response)
       })
   };
 
@@ -59,13 +60,14 @@ export default function AddCompanyIntoWalletForm({ data, profil, wallet }) {
     );
   }
 
-  if (err.status >= 400 && err.status <= 404) {
+  if (error.status >= 400 && error.status <= 404) {
     alert = (
       <Alert severity="error" className={styles.marginTopOne}>
-        {err.data}
+        {error.data}
       </Alert>
     );
   }
+
   return (
     <>
       <Card className={styles.margin} variant="outlined">

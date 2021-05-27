@@ -20,7 +20,6 @@ export default function CompanyItem({ data }) {
       <TableCell>{data.companyName}</TableCell>
       <TableCell>{data.symbol}</TableCell>
       <TableCell>${data.stockPrice}</TableCell>
-      <TableCell>${data.forecastPrice}</TableCell>
       <TableCell>{data.sharesNumber}</TableCell>
       <TableCell>{data.activityArea}</TableCell>
       <TableCell>

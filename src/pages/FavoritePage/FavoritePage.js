@@ -14,12 +14,14 @@ export default function FavoritePage() {
 
   const handleGoBack = (e) => {
     e.preventDefault();
+    localStorage.setItem("favorites", false)
     history.goBack();
   };
 
   useEffect(() => {
     (async () => {
       try {
+        localStorage.setItem("favorites", true)
         setFavorites(await getFavorites(username));
         setLoading(false);
       } catch (err) {

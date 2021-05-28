@@ -30,6 +30,11 @@ export const HomePage = () => {
     history.push(`/add-wallet/${username}/`);
   };
 
+  const handleClickFav = (e) => {
+    e.preventDefault();
+    history.push(`/favorites/${username}`)
+  }
+
   let spinner;
   let content;
   if(loading === true) {
@@ -55,6 +60,14 @@ export const HomePage = () => {
         onClick={handleClickCreate}
       >
         Create a new wallet
+      </Button>
+      <Button
+        className={styles.margin}
+        variant="contained"
+        color="secondary"
+        onClick={handleClickFav}
+      >
+        favorites
       </Button>
     </Container>
   }

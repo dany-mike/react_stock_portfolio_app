@@ -37,7 +37,6 @@ export default function Header({ isLoggedIn }) {
           to={`/favorites/${localStorage.getItem("username")}`}
           className={styles.menu}
         >
-          <Button color="inherit">Favorites</Button>
         </Link>
         <Link
           variant="body2"

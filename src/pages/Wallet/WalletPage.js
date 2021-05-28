@@ -7,18 +7,21 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Button, Container, Typography } from "@material-ui/core";
 import styles from "./WalletPage.module.css";
-import { WalletContentByWalletId } from "../../services/walletService";
+import { WalletContentByWalletId, getWalletAllocation } from "../../services/walletService";
 import { useEffect, useState } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
 import CompanyList from "../../components/CompanyList/CompanyList";
 import Circular from "../../components/Circular/Circular";
 import {useLocation} from "react-router-dom";
 import {getFavorites} from "../../services/favoriteService"
+import DoughnutAllocation from "../../components/DoughnutAllocation/DoughnutAllocation"
 
 export default function WalletPage() {
   const [walletContent, setWalletContent] = useState([]);
   const [loading, setLoading] = useState(true);
   const [favorites, setFavorites] = useState([]);
+  const [showAlloc, setShowAlloc] = useState(false)
+  const [walletAlloc, setWalletAlloc] = useState([])
 
   const history = useHistory();
   const { username } = useParams();
@@ -33,6 +36,7 @@ export default function WalletPage() {
       try {
         setWalletContent(await WalletContentByWalletId(username, walletId));
         setFavorites(await getFavorites(username))
+        setWalletAlloc(await getWalletAllocation(username, walletId))
         setLoading(false);
       } catch (err) {
         history.push("/signin");
@@ -40,13 +44,28 @@ export default function WalletPage() {
     })();
   }, [username, walletId, history]);
 
+  const showHideData = () => {
+    if(showAlloc) {
+      setShowAlloc(false)
+    }
+
+    if(!showAlloc) {
+      setShowAlloc(true)
+    }
+  }
+
   let spinner;
   let content;
+
+  console.log(walletAlloc)
 
   if (loading === true) {
     spinner = <Circular />;
   } else {
-    content = (
+    content = <>
+      <Typography variant="h4">Stocks Table</Typography>
+      <Typography variant='h6'>Total invested: <span style={{color: "green"}}>${walletAlloc.totalInvested}</span></Typography>
+      <br/>
       <TableContainer component={Paper} variant="outlined">
         <Table aria-label="simple table">
           <TableHead>
@@ -66,24 +85,28 @@ export default function WalletPage() {
           </TableBody>
         </Table>
       </TableContainer>
-    );
+    </>;
   }
   return (
     <Container className={styles.marginTop}>
       <Typography variant='h4'>{walletName}</Typography>
       <br/>
       {spinner}
-      {content}
+      { showAlloc ? null : content}
       <Link to={{pathname: `/search-page/${username}/${walletId}`}} className={styles.none}>
         <Button color="primary" variant="outlined" className={styles.mt} style={{margin: 2}}>
           {"Search a stock value to add"}{" "}
         </Button>
       </Link>
+      <Button variant="outlined" className={styles.mt} style={{margin: 2}} onClick={showHideData}>
+          {showAlloc ? "Stocks table" : "Allocation"}{" "}
+      </Button>
       <Link to={`/wallets/${username}`} className={styles.none}>
         <Button color="secondary" variant="outlined" className={styles.mt} style={{margin: 2}}>
           {"Back"}{" "}
         </Button>
       </Link>
+      { showAlloc ? <DoughnutAllocation dataAlloc={walletAlloc.arrayAllocation}/> : null}
     </Container>
   );
 }

@@ -19,7 +19,7 @@ export default function CompanyItem({ data }) {
     <TableRow key={data._id}>
       <TableCell>{data.companyName}</TableCell>
       <TableCell>{data.symbol}</TableCell>
-      <TableCell>${data.stockPrice.toFixed(2)}</TableCell>
+      <TableCell><span style={{color: "green"}}>${data.stockPrice.toFixed(2)}</span></TableCell>
       <TableCell>{data.sharesNumber}</TableCell>
       <TableCell>{data.activityArea ? data.activityArea : "Other"}</TableCell>
       <TableCell>

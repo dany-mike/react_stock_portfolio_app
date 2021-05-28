@@ -63,7 +63,6 @@ export default function AddPage() {
       }
 
       if (searchForm.companyName === "" && searchForm.sector !== "") {
-        console.log("test");
         setCompanies(await searchValueBySector(searchForm.sector));
       }
 
@@ -88,11 +87,19 @@ export default function AddPage() {
     <>
       <Container style={{ marginTop: 10 }}>
         <Typography className={classes.title}>Search stock values</Typography>
+        <FormControl fullWidth className={classes.margin} variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-amount">Company</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-amount"
+            onChange={handleChange}
+            name="companyName"
+          />
+        </FormControl>
         <FormControl component="fieldset">
-          <FormLabel component="legend">Sectors</FormLabel>
           <RadioGroup
             onChange={handleChange}
             name="sector"
+            style={{display: "inline-block"}}
           >
             <FormControlLabel
               value=""
@@ -145,14 +152,9 @@ export default function AddPage() {
               label="Energy"
             />
             <FormControlLabel
-              value="Communication"
+              value="Communication Services"
               control={<Radio />}
-              label="Communication"
-            />
-            <FormControlLabel
-              value="Services"
-              control={<Radio />}
-              label="Services"
+              label="Communication Services"
             />
             <FormControlLabel
               value="Materials"
@@ -165,14 +167,6 @@ export default function AddPage() {
               label="Utilities"
             />
           </RadioGroup>
-        </FormControl>
-        <FormControl fullWidth className={classes.margin} variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-amount">Company</InputLabel>
-          <OutlinedInput
-            id="outlined-adornment-amount"
-            onChange={handleChange}
-            name="companyName"
-          />
         </FormControl>
         <SearchedStockList companies={companies} />
       </Container>

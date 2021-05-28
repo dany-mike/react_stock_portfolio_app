@@ -24,7 +24,6 @@ export default function AddCompanyIntoWalletForm({ data, profil, wallet }) {
   const addFav = async () => {
     try {
       setRes(await addFavorite(username, symbol));
-      // console.log(await addFavorite(username, symbol));
     } catch (err) {
       setError(err.response);
     }

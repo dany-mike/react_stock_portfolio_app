@@ -57,8 +57,6 @@ export default function WalletPage() {
   let spinner;
   let content;
 
-  console.log(walletAlloc)
-
   if (loading === true) {
     spinner = <Circular />;
   } else {

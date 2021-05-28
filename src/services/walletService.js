@@ -54,3 +54,17 @@ export const WalletContentByWalletId = async(username, walletId) => {
 
     return walletContent
 }
+
+export const getWalletAllocation = async(username, walletId) => {
+    let walletContent = []
+
+    const response = await axios.get(`${baseURL}/wallet/allocation/${username}/${walletId}`, {
+        headers: {
+            'Authorization': token
+        }
+    })
+
+    walletContent = response.data
+
+    return walletContent
+}

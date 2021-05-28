@@ -22,11 +22,45 @@ export const getCompanyBySymbol = async (username, walletId, symbol) => {
   return company;
 };
 
+export const searchValueByNameAndSector = async (nameValue, sectorValue) => {
+  let company;
+
+  const response = await axios.get(
+    `${baseURL}/search?name=${nameValue}&sector=${sectorValue}`,
+    {
+      headers: {
+        'Authorization': `${token}`
+      }
+    }
+  );
+
+  company = response.data;
+
+  return company;
+};
+
 export const searchValueByName = async (nameValue) => {
   let company;
 
   const response = await axios.get(
     `${baseURL}/search?name=${nameValue}`,
+    {
+      headers: {
+        'Authorization': `${token}`
+      }
+    }
+  );
+
+  company = response.data;
+
+  return company;
+};
+
+export const searchValueBySector = async (sectorValue) => {
+  let company;
+
+  const response = await axios.get(
+    `${baseURL}/search?sector=${sectorValue}`,
     {
       headers: {
         'Authorization': `${token}`

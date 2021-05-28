@@ -65,6 +65,8 @@ export default function AboutCompanyPage() {
   let spinner;
   let content;
 
+  let priceTimeShares = company.sharesNumber * company.stockPrice;
+
   if (loading === true) {
     spinner = <Circular />;
   } else {
@@ -100,7 +102,7 @@ export default function AboutCompanyPage() {
                   My investment at {company.symbol}
                 </Typography>
                 <Typography variant="h4" component="h2">
-                  ${company.sharesNumber * company.stockPrice}
+                  ${priceTimeShares.toFixed(2)}
                 </Typography>
               </CardContent>
             </Card>

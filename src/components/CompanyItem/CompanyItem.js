@@ -19,9 +19,9 @@ export default function CompanyItem({ data }) {
     <TableRow key={data._id}>
       <TableCell>{data.companyName}</TableCell>
       <TableCell>{data.symbol}</TableCell>
-      <TableCell>${data.stockPrice}</TableCell>
+      <TableCell>${data.stockPrice.toFixed(2)}</TableCell>
       <TableCell>{data.sharesNumber}</TableCell>
-      <TableCell>{data.activityArea}</TableCell>
+      <TableCell>{data.activityArea ? data.activityArea : "Other"}</TableCell>
       <TableCell>
         <Link
           to={`/about-company/${username}/${walletId}/${data.symbol}`}

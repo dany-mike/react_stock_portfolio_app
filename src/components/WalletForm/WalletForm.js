@@ -25,7 +25,7 @@ export default function WalletForm(props) {
     
   const { username } = useParams();
   const { walletId } = useParams();
-  const baseURL = "http://localhost:3000"
+  const baseURL = "https://react-app-stock-portfolio.herokuapp.com"
 
   const classes = useStyles();
 

@@ -64,7 +64,7 @@ export default function WalletCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button variant="outlined" onClick={handleGoWallet}>Go to this wallet</Button>
+        <Button variant="outlined" onClick={handleGoWallet}>Read wallet</Button>
         <Button variant="outlined" color='primary' onClick={handleClickEdit}>Edit wallet</Button>
         <Button variant="outlined" color='secondary' onClick={handleClickDelete}>Delete Wallet</Button>
       </CardActions>

@@ -12,6 +12,7 @@ import { useState, useEffect } from "react";
 import {getStockPricesBySymbol, getStockNameBySymbol} from "../../services/stockService"
 import Circular from "../../components/Circular/Circular";
 import CompanyDescriptionCard from "../../components/CompanyDescriptionCard/CompanyDescriptionCard";
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles({
   root: {
@@ -31,6 +32,8 @@ const useStyles = makeStyles({
 });
 
 export default function AboutCompanyPage() {
+  const hidden = useMediaQuery('(max-width:750px)');
+
   const classes = useStyles();
 
   const [company, setCompany] = useState([]);
@@ -108,7 +111,7 @@ export default function AboutCompanyPage() {
             </Card>
           </Grid>
           <Grid item xs={12}>
-            <CompanyDescriptionCard data={prices} profil={profil}/>
+            {hidden ? null : <CompanyDescriptionCard data={prices} profil={profil}/>}
           </Grid>
         </Grid>
       </div>

@@ -1,7 +1,7 @@
 import axios from 'axios'
 const token = localStorage.getItem("token")
-const baseURL = "https://stock-portfolio-app-api.herokuapp.com"
-// const baseURL = "http://localhost:3000"
+// const baseURL = "https://stock-portfolio-app-api.herokuapp.com"
+const baseURL = "http://localhost:3000"
 
 export const getWalletsByUsername = async (username) => {
     let wallets = []

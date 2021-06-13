@@ -69,8 +69,6 @@ export default function Auth({authType, isLoggedIn}) {
             localStorage.setItem("token", "")
             document.location.reload()
         }
-
-        console.log(resObject)
     })
 
     const handleChange = (e) => {
@@ -150,7 +148,7 @@ export default function Auth({authType, isLoggedIn}) {
         alertError = <Alert severity="error" className={styles.marginTopOne}>{resObject.data}</Alert>
     }
 
-    if(resObject.status === 200 && resObject.config.url === "http://localhost:3000/user/register") {
+    if(resObject.status === 200 && resObject.config.url === "https://stock-portfolio-app-api.herokuapp.com/user/register") {
         alertError = <Alert severity="success" className={styles.marginTopOne}>User registered successfully</Alert>
     }
 

@@ -87,7 +87,7 @@ export default function Auth({authType, isLoggedIn}) {
                 localStorage.setItem("token", resSign.data[0].token)
                 localStorage.setItem("username", resUser.username)
                 history.push(`/wallets/${resUser.username}`)
-                // document.location.reload();
+                document.location.reload();
             }
 
             if(resSign.status !== 200) {

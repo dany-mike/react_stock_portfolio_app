@@ -100,7 +100,6 @@ export default function Auth({authType, isLoggedIn}) {
 
             if(resRegister.status === 200) {
                 const resUser = await getUser(resRegister.data.user)
-                console.log(resUser)
                 setResObject(resRegister)
                 history.push(`/wallets/${resUser.username}`)
             }

@@ -87,7 +87,7 @@ export default function Auth({authType, isLoggedIn}) {
                 localStorage.setItem("token", resSign.data[0].token)
                 localStorage.setItem("username", resUser.username)
                 history.push(`/wallets/${resUser.username}`)
-                document.location.reload();
+                // document.location.reload();
             }
 
             if(resSign.status !== 200) {
@@ -99,7 +99,10 @@ export default function Auth({authType, isLoggedIn}) {
             const resRegister = await signup(auth)
 
             if(resRegister.status === 200) {
+                const resUser = await getUser(resRegister.data.user)
+                console.log(resUser)
                 setResObject(resRegister)
+                history.push(`/wallets/${resUser.username}`)
             }
 
             if(resRegister.status !== 200) {
